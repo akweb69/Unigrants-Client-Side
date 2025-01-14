@@ -5,7 +5,7 @@ const Navbar = () => {
     const [hover, setHover] = useState(false)
     return (
         <div className="w-full h-16 backdrop-blur-md">
-            <div className="w-11/12 border border-red-500 mx-auto h-full flex justify-between items-center">
+            <div className="w-11/12  mx-auto h-full flex justify-between items-center">
                 {/* left logo */}
                 <div className="">
                     <h1 className="text-2xl md:text-4xl font-logoFont font-extrabold"><b className="text-orange-500">U</b>ni<b className="text-orange-500">G</b>rants</h1>
