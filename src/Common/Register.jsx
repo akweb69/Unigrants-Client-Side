@@ -67,7 +67,6 @@ const Register = () => {
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {
-
                 setLoading(false)
                 const userData = res.user
                 console.log("user--->", userData)
