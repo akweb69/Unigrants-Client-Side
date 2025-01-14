@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 
 const Navbar = () => {
+    // todo ---> responsivness
+
     const [hover, setHover] = useState(false)
     const { user, logout, loading } = useContext(AuthContext);
     return (
@@ -26,7 +28,7 @@ const Navbar = () => {
                         {
                             user && user?.email ? <div
                                 onClick={logout}
-                                className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' >Logout</div> : ''
+                                className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem] cursor-pointer' >Logout</div> : ''
                         }
                         {
                             user && user?.email ?

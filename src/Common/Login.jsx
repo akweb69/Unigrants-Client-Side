@@ -1,12 +1,26 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
 
     const { register, handleSubmit } = useForm()
+    const { user, setUser, loading, loginEmailandPassword } = useContext(AuthContext);
     const onSubmit = (data) => {
         console.log(data)
+        loginEmailandPassword(data.email, data.password)
+            .then(res => {
+                console.log(res.user)
+                toast.success("Login success!")
+            })
+            .catch(err => {
+                console.log(err)
+                toast.error("Invalid user or password")
+            })
+
     }
     return (
         <div className="w-full ">
