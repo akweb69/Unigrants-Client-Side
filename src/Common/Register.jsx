@@ -11,15 +11,21 @@ const Register = () => {
     return (
         <div className="w-full ">
             <div className="w-11/12 mx-auto md:w-full">
-                <div className="md:grid md:grid-cols-3 ">
-                    {/* right sside */}
-                    <div className="col-span-2 md:h-screen "><img src="https://i.ibb.co/8s7drjn/slider1.jpg" className="w-full h-full object-cover" alt="" /></div>
+                <div className="flex flex-col-reverse md:flex md:flex-row w-full min-h-screen">
+
                     {/* left side */}
-                    <div className="col-span-1 w-full h-full bg-gray-100">
+                    <div className="flex-1 w-full h-full min-h-screen bg-gray-100">
                         <div className="p-5">
                             <h1 className="text-3xl md:text-5xl font-bold font-logoFont pb-10">Create Account</h1>
                             {/* form */}
-                            <form onSubmit={handleSubmit(onSubmit)}>
+                            <form className="font-secondary" onSubmit={handleSubmit(onSubmit)}>
+                                {/* email */}
+                                <label className="form-control w-full">
+                                    <div className="label">
+                                        <span className="label-text text-lg">User Name</span>
+                                    </div>
+                                    <input {...register("name")} type="text" placeholder="Abu Kalam" className="input input-bordered w-full" />
+                                </label>
                                 {/* email */}
                                 <label className="form-control w-full">
                                     <div className="label">
@@ -33,6 +39,14 @@ const Register = () => {
                                         <span className="label-text text-lg">Password</span>
                                     </div>
                                     <input {...register("password")} type="password" placeholder="password" className="input input-bordered w-full" />
+                                </label>
+
+                                {/* profile photo */}
+                                <label className="form-control w-full">
+                                    <div className="label">
+                                        <span className="label-text text-lg">Profile Photo</span>
+                                    </div>
+                                    <input {...register("photo")} type="file" className="file-input text-lg file-input-bordered w-full" />
                                 </label>
                                 {/* btn */}
                                 <div className="my-5">
@@ -58,6 +72,8 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
+                    {/* right sside */}
+                    <div className="w-full md:w-[60%] md:h-screen "><img src="https://i.ibb.co/ry1PcZB/register.jpg" className="w-full h-full object-cover" alt="" /></div>
                 </div>
             </div>
         </div>
