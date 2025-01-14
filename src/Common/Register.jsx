@@ -1,20 +1,50 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../Firebase/firebaseConig";
+import axios from "axios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const Register = () => {
 
     const { setUser, user, createUserWithEmailAndPass, googleLogin, loading, setLoading } = useContext(AuthContext);
 
     const { register, handleSubmit } = useForm()
-    const onSubmit = (data) => {
-        console.log(data)
+    const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
+    const axiosSecure = useAxiosSecure();
 
-        // console.log("user from register ---> ", user, loading)
+
+    const onSubmit = async (data) => {
+        console.log(data)
+        // ! upload image on imgbb hosting site
+        const imgFile = { image: data.photo[0] }
+        const date = new Date()
+
+        const res = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbb_api_hosting_key}`, imgFile, {
+            headers: {
+                'content-type': "multipart/form-data"
+            }
+        })
+        if (res.data.success) {
+            const user = {
+                name: data.name,
+                email: data.email,
+                img: res.data.data.display_url,
+                time: date.toString()
+
+            }
+
+            axiosSecure.post("/users", user)
+                .then(res => {
+                    console.log("database-data---->", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
         createUserWithEmailAndPass(data.email, data.password)
             .then(res => {
                 setUser(res.data)
@@ -30,6 +60,7 @@ const Register = () => {
                 console.log(err)
             })
     }
+
     return (
         <div className="w-full ">
             <div className="w-11/12 mx-auto md:w-full">
