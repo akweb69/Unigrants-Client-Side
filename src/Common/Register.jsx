@@ -1,12 +1,34 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthContext/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import auth from "../Firebase/firebaseConig";
 
 const Register = () => {
+
+    const { setUser, user, createUserWithEmailAndPass, googleLogin, loading, setLoading } = useContext(AuthContext);
 
     const { register, handleSubmit } = useForm()
     const onSubmit = (data) => {
         console.log(data)
+
+        // console.log("user from register ---> ", user, loading)
+        createUserWithEmailAndPass(data.email, data.password)
+            .then(res => {
+                setUser(res.data)
+                updateProfile(auth.currentUser, {
+                    displayName: data.name, photoURL: "photo"
+                }).then(() => {
+                    setLoading(false)
+                }).catch((error) => {
+                    console.log(error)
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     return (
         <div className="w-full ">

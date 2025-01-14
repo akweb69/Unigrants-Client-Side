@@ -42,6 +42,10 @@ const AuthProvider = ({ children }) => {
         createUserWithEmailAndPass,
         googleLogin,
         logout,
+        loading,
+        setLoading,
+        user,
+        setUser
     }
 
     useEffect(() => {
