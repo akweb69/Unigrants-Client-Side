@@ -1,24 +1,57 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Login = () => {
 
     const { register, handleSubmit } = useForm()
-    const { user, setUser, loading, loginEmailandPassword } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic()
+    const navigate = useNavigate()
+    const { user, setUser, loading, setLoading, loginEmailandPassword, googleLogin } = useContext(AuthContext);
     const onSubmit = (data) => {
         console.log(data)
         loginEmailandPassword(data.email, data.password)
             .then(res => {
                 console.log(res.user)
                 toast.success("Login success!")
+                navigate("/")
             })
             .catch(err => {
                 console.log(err)
                 toast.error("Invalid user or password")
+            })
+
+    }
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(res => {
+                setLoading(false)
+                const userData = res.user
+                console.log("user--->", userData)
+                setUser(userData)
+                toast.success("Login success!")
+                navigate("/")
+                const user = {
+                    name: userData?.displayName,
+                    email: userData?.email,
+                    img: userData?.photoURL,
+                    role: "user"
+                }
+                axiosPublic.post(`/users/?email=${userData?.email}`, user)
+                    .then(res => {
+                        console.log(res.data)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err)
             })
 
     }
@@ -60,7 +93,9 @@ const Login = () => {
                             </form>
                             {/* google login */}
                             <div className="">
-                                <div className="flex justify-center items-center gap-2 text-lg cursor-pointer p-3 border rounded-lg shadow-lg hover:shadow-xl transform hover:scale-102 transition duration-300 my-5 bg-white hover:bg-blue-50">
+                                <div
+                                    onClick={handleGoogleLogin}
+                                    className="flex justify-center items-center gap-2 text-lg cursor-pointer p-3 border rounded-lg shadow-lg hover:shadow-xl transform hover:scale-102 transition duration-300 my-5 bg-white hover:bg-blue-50">
                                     <FaGoogle className="text-blue-500 text-2xl" />
                                     <span className="font-semibold  font-primary text-gray-800">Login With Google</span>
                                 </div>
