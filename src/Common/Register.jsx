@@ -1,12 +1,13 @@
 import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import auth from "../Firebase/firebaseConig";
 import axios from "axios";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const Register = () => {
 
@@ -14,14 +15,15 @@ const Register = () => {
 
     const { register, handleSubmit } = useForm()
     const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
 
     const onSubmit = async (data) => {
         console.log(data)
         // ! upload image on imgbb hosting site
         const imgFile = { image: data.photo[0] }
-        const date = new Date()
+
 
         const res = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbb_api_hosting_key}`, imgFile, {
             headers: {
@@ -33,11 +35,10 @@ const Register = () => {
                 name: data.name,
                 email: data.email,
                 img: res.data.data.display_url,
-                time: date.toString()
-
+                role: "user"
             }
 
-            axiosSecure.post("/users", user)
+            axiosPublic.post("/users", user)
                 .then(res => {
                     console.log("database-data---->", res.data)
                 })
@@ -51,14 +52,48 @@ const Register = () => {
                 updateProfile(auth.currentUser, {
                     displayName: data.name, photoURL: "photo"
                 }).then(() => {
+                    toast.success("Register success!")
                     setLoading(false)
                 }).catch((error) => {
                     console.log(error)
                 });
             })
             .catch(err => {
+                setLoading(false)
                 console.log(err)
             })
+    }
+    // on google or social login system
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(res => {
+
+                setLoading(false)
+                const userData = res.user
+                console.log("user--->", userData)
+                setUser(userData)
+                toast.success("Login success!")
+                const user = {
+                    name: userData?.displayName,
+                    email: userData?.email,
+                    img: userData?.photoURL,
+                    role: "user"
+                }
+                axiosPublic.post(`/users/?email=${userData?.email}`, user)
+                    .then(res => {
+
+                        console.log(res.data)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+            })
+            .catch(err => {
+                setLoading(false)
+                console.log(err)
+            })
+
     }
 
     return (
@@ -113,7 +148,9 @@ const Register = () => {
                             </form>
                             {/* google login */}
                             <div className="">
-                                <div className="flex justify-center items-center gap-2 text-lg cursor-pointer p-3 border rounded-lg shadow-lg hover:shadow-xl transform hover:scale-102 transition duration-300 my-5 bg-white hover:bg-blue-50">
+                                <div
+                                    onClick={handleGoogleLogin}
+                                    className="flex justify-center items-center gap-2 text-lg cursor-pointer p-3 border rounded-lg shadow-lg hover:shadow-xl transform hover:scale-102 transition duration-300 my-5 bg-white hover:bg-blue-50">
                                     <FaGoogle className="text-blue-500 text-2xl" />
                                     <span className="font-semibold  font-primary text-gray-800">Login With Google</span>
                                 </div>
