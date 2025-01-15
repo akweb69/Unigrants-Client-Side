@@ -25,28 +25,14 @@ const Banner = () => {
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Explore scholarships that match your academic goals.</p>
 
                                 <div className="py-7 w-full">
-                                    <div className="relative w-11/12 mx-auto border max-w-xl h-14 rounded-full flex items-center shadow-lg">
-                                        {/* Left Icon */}
-                                        <div className="pl-4 text-gray-500">
-                                            <FaSearch size={20} />
-                                        </div>
-
-                                        {/* Input Field */}
-                                        <input
-                                            type="text"
-                                            placeholder="Search for scholarships, universities..."
-                                            className="flex-1 h-full px-4 outline-none text-orange-700 bg-transparent rounded-l-full"
-                                        />
-
-                                        {/* Right Button */}
-                                        <div className="pr-2">
-                                            <Link
-                                                className="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-md flex items-center justify-center"
-                                                to="/"
-                                            >
-                                                <span className="hidden sm:block">Search</span>
-                                                <FaSearch className="block sm:hidden" />
-                                            </Link>
+                                    <div className="w-11/12 md:w-1/3 mx-auto p-1 rounded-full border border-orange-500 mb-10">
+                                        <div className="w-full flex justify-between items-center gap-1 flex-grow">
+                                            <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
+                                            <div className="flex-1"><input type="text" className="w-full outline-none bg-transparent border-0 text-white" placeholder="Search Scholaship by university , country ..." /></div>
+                                            {/* btn */}
+                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                                Search
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -59,28 +45,14 @@ const Banner = () => {
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Turn your aspirations into achievements with the right funding.</p>
 
                                 <div className="py-7 w-full">
-                                    <div className="relative w-11/12 mx-auto border max-w-xl h-14 rounded-full flex items-center shadow-lg">
-                                        {/* Left Icon */}
-                                        <div className="pl-4 text-gray-500">
-                                            <FaSearch size={20} />
-                                        </div>
-
-                                        {/* Input Field */}
-                                        <input
-                                            type="text"
-                                            placeholder="Search for scholarships, universities..."
-                                            className="flex-1 h-full px-4 outline-none text-orange-700 bg-transparent rounded-l-full"
-                                        />
-
-                                        {/* Right Button */}
-                                        <div className="pr-2">
-                                            <Link
-                                                className="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-md flex items-center justify-center"
-                                                to="/"
-                                            >
-                                                <span className="hidden sm:block">Search</span>
-                                                <FaSearch className="block sm:hidden" />
-                                            </Link>
+                                    <div className="w-11/12 md:w-1/3 mx-auto p-1 rounded-full border border-orange-500 mb-10">
+                                        <div className="w-full flex justify-between items-center gap-1 flex-grow">
+                                            <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
+                                            <div className="flex-1"><input type="text" className="w-full outline-none bg-transparent border-0 text-white" placeholder="Search Scholaship by university , country ..." /></div>
+                                            {/* btn */}
+                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                                Search
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -93,28 +65,14 @@ const Banner = () => {
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Streamline your application process with UniGrants.</p>
 
                                 <div className="py-7 w-full">
-                                    <div className="relative w-11/12 mx-auto border max-w-xl h-14 rounded-full flex items-center shadow-lg">
-                                        {/* Left Icon */}
-                                        <div className="pl-4 text-gray-500">
-                                            <FaSearch size={20} />
-                                        </div>
-
-                                        {/* Input Field */}
-                                        <input
-                                            type="text"
-                                            placeholder="Search for scholarships, universities..."
-                                            className="flex-1 h-full px-4 outline-none text-orange-700 bg-transparent rounded-l-full"
-                                        />
-
-                                        {/* Right Button */}
-                                        <div className="pr-2">
-                                            <Link
-                                                className="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-all duration-300 shadow-md flex items-center justify-center"
-                                                to="/"
-                                            >
-                                                <span className="hidden sm:block">Search</span>
-                                                <FaSearch className="block sm:hidden" />
-                                            </Link>
+                                    <div className="w-11/12 md:w-1/3 mx-auto p-1 rounded-full border border-orange-500 mb-10">
+                                        <div className="w-full flex justify-between items-center gap-1 flex-grow">
+                                            <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
+                                            <div className="flex-1"><input type="text" className="w-full outline-none text-white bg-transparent border-0" placeholder="Search Scholaship by university , country ..." /></div>
+                                            {/* btn */}
+                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                                Search
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

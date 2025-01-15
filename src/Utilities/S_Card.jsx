@@ -24,7 +24,7 @@ const S_Card = ({ data }) => {
             </div>
             {/* button */}
             <div className="w-full text-center pt-5 pb-1 ">
-                <Link className="w-full inline-block p-3 text-center border rounded-lg bg-gradient-to-tr from-orange-500 to-orange-500 hover:from-orange-500 hover:to-fuchsia-500 text-white font-logoFont text-base md:text-lg" to={`s-details/${_id}`}> Scholarship Details</Link>
+                <Link className="w-full inline-block p-3 text-center border rounded-lg bg-gradient-to-tr from-orange-500 to-orange-500 hover:from-orange-500 hover:to-fuchsia-500 text-white font-logoFont text-base md:text-lg" to={`/s-details/${_id}`}> Scholarship Details</Link>
             </div>
         </div>
     );

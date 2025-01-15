@@ -6,7 +6,7 @@ const Heading = ({ one, two }) => {
             <div className="w-11/12 mx-auto">
                 <h1 className="text-3xl md:text-5xl font-logoFont font-extrabold text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto ">{one}</h1>
                 <p className="text-gray-400 text-center">
-                    "{two}"
+                    {two}
                 </p>
             </div>
         </div>

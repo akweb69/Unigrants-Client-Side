@@ -43,7 +43,7 @@ const Navbar = () => {
                                     <img className="w-full h-full rounded-full" referrerPolicy="no-referrer" src={user?.photoURL} alt="" />
                                 </div>
                                 :
-                                <div className="">
+                                <div className="ml-4">
                                     <Link
                                         onMouseEnter={() => setHover(true)}
                                         onMouseLeave={() => setHover(false)}

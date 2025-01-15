@@ -2,14 +2,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 
-const useScholarship = () => {
+const useAll_Schol = () => {
     const axiosPublic = useAxiosPublic()
 
 
     const { data: scholarship = [] } = useQuery({
         queryKey: ["scholarship"],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/top_Scholarship`)
+            const res = await axiosPublic.get(`/all_Scholarship`)
             return res.data
 
         }
@@ -19,4 +19,4 @@ const useScholarship = () => {
 
 };
 
-export default useScholarship;
+export default useAll_Schol;
