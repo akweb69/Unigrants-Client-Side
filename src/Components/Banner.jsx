@@ -20,7 +20,7 @@ const Banner = () => {
                     <Slider {...settings}>
                         <div className="">
                             <div className="w-full h-[80vh] flex justify-center flex-col bg-slider-01 items-center bg-center text-center bg-cover bg-no-repeat bg-[rgba(0,0,0,0.6)] bg-blend-overlay ">
-                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-secondary py-4">Find Your Dream Scholarship</h1>
+                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-logoFont py-4">Find Your Dream Scholarship</h1>
 
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Explore scholarships that match your academic goals.</p>
 
@@ -54,7 +54,7 @@ const Banner = () => {
                         </div>
                         <div className="">
                             <div className="w-full h-[80vh] flex justify-center flex-col bg-slider-02 items-center bg-center text-center bg-cover bg-no-repeat bg-[rgba(0,0,0,0.6)] bg-blend-overlay ">
-                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-secondary py-4">Achieve Excellence</h1>
+                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-logoFont py-4">Achieve Excellence</h1>
 
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Turn your aspirations into achievements with the right funding.</p>
 
@@ -88,7 +88,7 @@ const Banner = () => {
                         </div>
                         <div className="">
                             <div className="w-full h-[80vh] flex justify-center flex-col bg-slider-03 items-center bg-center text-center bg-cover bg-no-repeat bg-[rgba(0,0,0,0.6)] bg-blend-overlay ">
-                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-secondary py-4">Apply Effortlessly</h1>
+                                <h1 className="text-4xl px-4 md:text-6xl lg:text-8xl text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  font-extrabold font-logoFont py-4">Apply Effortlessly</h1>
 
                                 <p className="md:text-xl font-semibold  text-transparent bg-gradient-to-l from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto  px-4">Streamline your application process with UniGrants.</p>
 
