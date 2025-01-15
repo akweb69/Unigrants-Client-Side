@@ -1,10 +1,17 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
+import axios from "axios";
+import { useEffect } from "react";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Navbar = () => {
     // todo ---> responsivness
+    const axiosPublic = useAxiosPublic()
+    useEffect(() => {
+        // axiosPublic.post("/add_Scholarship", { hi: "hgi" })
 
+    }, [])
     const [hover, setHover] = useState(false)
     const { user, logout, loading } = useContext(AuthContext);
     return (

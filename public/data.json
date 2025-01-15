@@ -1,0 +1,57 @@
+[
+    {
+      "scholarshipName": "Global Excellence Scholarship",
+      "universityName": "University of Cambridge",
+      "universityImage": "https://i.ibb.co/CWcvnwv/Banner-Image-The-University-of-Cambridge.webp",
+      "universityLogo": "https://i.ibb.co/dDZd0rp/cambridge-logo.png",
+      "universityCountry": "United Kingdom",
+      "universityCity": "Cambridge",
+      "universityWorldRank": 2,
+      "subjectCategory": "Engineering",
+      "scholarshipCategory": "Full fund",
+      "degree": "Masters",
+      "tuitionFees": 30000,
+      "applicationFees": 50,
+      "serviceCharge": 200,
+      "applicationDeadline": "2025-03-15",
+      "scholarshipPostDate": "2025-01-10",
+      "postedUserEmail": "kalam@gmail.com"
+    },
+    {
+      "scholarshipName": "Future Leaders Agriculture Scholarship",
+      "universityName": "University of Queensland",
+      "universityImage": "https://i.ibb.co/wwMm2vN/university-of-queensland-logo-st-lucia-campus-1024x538.jpg",
+      "universityLogo": "https://i.ibb.co/ncVCqtJ/AZ-logo-university-of-queensland-removebg-preview.png",
+      "universityCountry": "Australia",
+      "universityCity": "Brisbane",
+      "universityWorldRank": 47,
+      "subjectCategory": "Agriculture",
+      "scholarshipCategory": "Partial",
+      "degree": "Bachelor",
+      "tuitionFees": 25000,
+      "applicationFees": 70,
+      "serviceCharge": 300,
+      "applicationDeadline": "2025-06-30",
+      "scholarshipPostDate": "2025-01-05",
+      "postedUserEmail": "kalam@gmail.com"
+    },
+    {
+      "scholarshipName": "Medical Excellence Scholarship",
+      "universityName": "Harvard University",
+      "universityImage": "https://i.ibb.co/gJ8grsL/images.jpg",
+      "universityLogo": "https://i.ibb.co/qdrLTfs/images-removebg-preview-1.png",
+      "universityCountry": "United States",
+      "universityCity": "Cambridge",
+      "universityWorldRank": 1,
+      "subjectCategory": "Doctor",
+      "scholarshipCategory": "Self-fund",
+      "degree": "Diploma",
+      "tuitionFees": 15000,
+      "applicationFees": 100,
+      "serviceCharge": 250,
+      "applicationDeadline": "2025-05-20",
+      "scholarshipPostDate": "2025-01-12",
+      "postedUserEmail": "kalam@gmail.com"
+    }
+  ]
+  
