@@ -12,7 +12,7 @@ const Navbar = () => {
             <div className="w-11/12  mx-auto h-full flex justify-between items-center">
                 {/* left logo */}
                 <div className="">
-                    <h1 className="text-2xl md:text-4xl font-logoFont font-extrabold"><b className="text-orange-500">U</b>ni<b className="text-orange-500">G</b>rants</h1>
+                    <Link to={"/"} className="text-2xl md:text-4xl font-logoFont font-extrabold"><b className="text-orange-500">U</b>ni<b className="text-orange-500">G</b>rants</Link>
                 </div>
                 {/* right links */}
                 <div className="flex-1">
@@ -41,10 +41,10 @@ const Navbar = () => {
                                         onMouseEnter={() => setHover(true)}
                                         onMouseLeave={() => setHover(false)}
                                         to={'/login'} className="px-3 py-2 rounded-sm hover:bg-orange-500 border border-orange-500 hover:text-white">Login</Link>
-                                    <Link to={"/register"} className={`px-3 py-2 rounded-sm  border border-orange-500 text-white ${hover ? "bg-white text-black" : "bg-orange-500"}`}>Register</Link>
+
+                                    <Link to={"/register"} className={`px-3 py-2 rounded-sm  border border-orange-500 text-black ${hover ? "bg-white text-black" : "bg-orange-500"}`}>Register</Link>
                                 </div>
                         }
-
 
                     </div>
                 </div>
