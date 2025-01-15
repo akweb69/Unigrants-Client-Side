@@ -8,7 +8,7 @@ const S_Card = ({ data }) => {
                 <div className="flex items-center gap-2">
                     <img className="w-14 h-14 rounded-full" src={universityLogo} alt="" />
                     <div className="flex-1">
-                        <p className="text-2xl font-bold font-logoFont">{universityName}</p>
+                        <p className="text-xl md:text-2xl font-bold font-logoFont">{universityName}</p>
                         <p className="font-logoFont text-sm">{universityCity} , {universityCountry}</p>
                     </div>
                 </div>
