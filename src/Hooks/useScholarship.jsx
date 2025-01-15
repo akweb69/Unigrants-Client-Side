@@ -1,22 +1,21 @@
-import { useContext } from "react";
-import useAxiosSecure from "./useAxiosSecure";
-import { AuthContext } from "../AuthContext/AuthProvider";
+
 import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "./useAxiosPublic";
 
 const useScholarship = () => {
-    const axiosSecure = useAxiosSecure()
-    const { user } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic()
 
 
-    const { refetch, data: scholarship = {} } = useQuery({
+    const { data: scholarship = [] } = useQuery({
         queryKey: ["scholarship"],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/add_Scholarship`)
+            const res = await axiosPublic.get(`/all_Scholarship`)
             return res.data
+
         }
     })
     console.log(scholarship)
-    return [scholarship, refetch]
+    return [scholarship]
 
 };
 
