@@ -2,7 +2,7 @@
 const AddScholarship = () => {
     return (
         <div>
-
+            sds
         </div>
     );
 };
