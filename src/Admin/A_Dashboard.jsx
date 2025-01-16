@@ -56,13 +56,13 @@ const A_Dashboard = () => {
             </div>
             <div className="w-full hidden md:flex h-full">
                 {/* left side */}
-                <div className="w-[250px] bg-orange-100 min-h-screen py-4">
+                <div className="w-[200px] bg-orange-100 min-h-screen py-4">
                     <h1 className="text-2xl md:text-3xl font-logoFont font-extrabold text-transparent 
                     bg-gradient-to-tr from-orange-500 mb-4 to-fuchsia-500 bg-clip-text  w-fit mx-auto px-4">Dashboard</h1>
 
                     {/* links */}
                     <div className="">
-                        <ul>
+                        <ul className="space-y-1">
                             <li><NavLink to={"/admin-dashboard"} className="btn rounded-none w-full  text-white btn-error">Admin Profile</NavLink></li>
 
                             <li><NavLink to={"/admin-dashboard/add-scholarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
