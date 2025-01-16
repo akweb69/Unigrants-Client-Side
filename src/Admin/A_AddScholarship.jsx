@@ -1,15 +1,77 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../AuthContext/AuthProvider";
+import axios from "axios";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 const A_AddScholarship = () => {
 
     const { register, handleSubmit } = useForm()
-    const onSubmit = (data) => {
-        console.log(data)
+    const { user } = useContext(AuthContext);
+    const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
 
-    }
     const date = new Date()
     const today = date.toLocaleDateString()
-    console.log(today)
+    const email = user?.email;
+    const axiosPublic = useAxiosPublic();
+
+    const onSubmit = async (data) => {
+
+        const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
+
+        const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
+        // ! upload image on imgbb hosting site
+        // Create FormData for each file
+        const formData1 = new FormData();
+        const formData2 = new FormData();
+        formData1.append("image", data.universityLogo[0]);
+        formData2.append("image", data.universityImage[0]);
+
+        // Upload the university logo
+        const res1 = await axios.post(
+            `https://api.imgbb.com/1/upload?key=${imgbb_api_hosting_key}`,
+            formData1,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        // Upload the university image
+        const res2 = await axios.post(
+            `https://api.imgbb.com/1/upload?key=${imgbb_api_hosting_key}`,
+            formData2,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+        //  get the url for logo and image 
+        const logoUrl = res1.data.data.display_url;
+        const imageUrl = res2.data.data.display_url;
+
+        // Add the URLs to your scholarship data
+        const completeScholarshipData = {
+            ...scholarshipData,
+            universityLogo: logoUrl,
+            universityImage: imageUrl,
+            applicationDeadline: deadline,
+        };
+        console.log(completeScholarshipData)
+
+        //!_________Post the data on database__________
+        axiosPublic.post("/add_Scholarship", completeScholarshipData)
+            .then(res => {
+                const data = res.data;
+                toast.success("Your Scholarship Added successfully!")
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }
 
     const countries = [
         "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda",
@@ -168,20 +230,20 @@ const A_AddScholarship = () => {
                         <div className="label">
                             <span className="label-text">University Logo</span>
                         </div>
-                        <input type="file" className="file-input file-input-warning file-input-bordered w-full " />
+                        <input {...register("universityLogo")} type="file" className="file-input file-input-warning file-input-bordered w-full " />
                     </label>
                     <label className="form-control w-full ">
                         <div className="label">
                             <span className="label-text">University Image</span>
                         </div>
-                        <input type="file" className="file-input file-input-bordered file-input-warning w-full " />
+                        <input {...register("universityImage")} type="file" className="file-input file-input-bordered file-input-warning w-full " />
                     </label>
                 </div>
 
                 {/* button submit */}
                 <div className="w-11/12 mx-auto mt-5">
                     <button
-                        className="w-full text-center py-3 text-white text-xl font-logoFont font-semibold bg-orange-600 rounded-lg hover:bg-orange-500 active:bg-orange-700 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-y-105 active:scale-95 border-2 border-orange-600 hover:border-orange-400"
+                        className="w-full text-center py-3 text-white text-xl font-logoFont font-semibold bg-orange-500 rounded-lg hover:bg-orange-400 active:bg-orange-700 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-y-105 active:scale-95 border-2 border-orange-600 hover:border-orange-400"
                     >
                         Add Scholarship
                     </button>
