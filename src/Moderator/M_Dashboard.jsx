@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 
-const A_Dashboard = () => {
+const M_Dashboard = () => {
     const [menu, setMenu] = useState(false)
     return (
         <div className="w-full min-h-screen bg-orange-50">
@@ -32,17 +32,17 @@ const A_Dashboard = () => {
 
                             <ul>
                                 <ul>
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard"} className="btn rounded-none w-full  text-white btn-error">Admin Profile</NavLink></li>
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/mod-dashboard"} className="btn rounded-none w-full  text-white btn-error">My Profile</NavLink></li>
 
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/add-scholarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/mod-dashboard/add-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
 
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/manage-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/mod-dashboard/manage-scholarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
 
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/manage-application"} className="btn rounded-none w-full  text-white btn-error">Manage Application</NavLink></li>
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/mod-dashboard/all-application"} className="btn rounded-none w-full  text-white btn-error">Manage Application</NavLink></li>
 
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/manage-users"} className="btn rounded-none w-full  text-white btn-error">Manage Users</NavLink></li>
 
-                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/manage-reviews"} className="btn rounded-none w-full  text-white btn-error">Manage Reviews</NavLink></li>
+
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/mod-dashboard/all-reviews"} className="btn rounded-none w-full  text-white btn-error">Manage Reviews</NavLink></li>
                                 </ul>
                             </ul>
 
@@ -63,17 +63,15 @@ const A_Dashboard = () => {
                     {/* links */}
                     <div className="">
                         <ul>
-                            <li><NavLink to={"/admin-dashboard"} className="btn rounded-none w-full  text-white btn-error">Admin Profile</NavLink></li>
+                            <li><NavLink to={"/mod-dashboard"} className="btn rounded-none w-full  text-white btn-error">My Profile</NavLink></li>
 
-                            <li><NavLink to={"/admin-dashboard/add-scholarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
+                            <li><NavLink to={"/mod-dashboard/add-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
 
-                            <li><NavLink to={"/admin-dashboard/manage-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
+                            <li><NavLink to={"/mod-dashboard/manage-scholarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
 
-                            <li><NavLink to={"/admin-dashboard/manage-application"} className="btn rounded-none w-full  text-white btn-error">Manage Application</NavLink></li>
+                            <li><NavLink to={"/mod-dashboard/all-application"} className="btn rounded-none w-full  text-white btn-error">Manage Application</NavLink></li>
 
-                            <li><NavLink to={"/admin-dashboard/manage-users"} className="btn rounded-none w-full  text-white btn-error">Manage Users</NavLink></li>
-
-                            <li><NavLink to={"/admin-dashboard/manage-reviews"} className="btn rounded-none w-full  text-white btn-error">Manage Reviews</NavLink></li>
+                            <li><NavLink to={"/mod-dashboard/all-reviews"} className="btn rounded-none w-full  text-white btn-error">Manage Reviews</NavLink></li>
                         </ul>
                     </div>
                 </div>
@@ -86,4 +84,4 @@ const A_Dashboard = () => {
     );
 };
 
-export default A_Dashboard;
+export default M_Dashboard;

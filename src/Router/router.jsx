@@ -16,6 +16,12 @@ import A_ManageScholarship from "../Admin/A_ManageScholarship";
 import A_M_Application from "../Admin/A_M_Application";
 import A_M_Users from "../Admin/A_M_Users";
 import A_M_Review from "../Admin/A_M_Review";
+import M_Dashboard from "../Moderator/M_Dashboard";
+import M_Profile from "../Moderator/M_Profile";
+import M_scholarship from "../Moderator/M_scholarship";
+import All_Reviews from "../Moderator/All_Reviews";
+import All_Apply from "../Moderator/All_Apply";
+import Add_Schol from "../Moderator/Add_Schol";
 
 
 
@@ -92,6 +98,33 @@ const router = createBrowserRouter([
                     {
                         path: "/admin-dashboard/manage-reviews",
                         element: <A_M_Review></A_M_Review>
+                    }
+                ]
+            },
+            // !-----moderator routes----
+            {
+                path: "/mod-dashboard",
+                element: <M_Dashboard></M_Dashboard>,
+                children: [
+                    {
+                        path: "/mod-dashboard",
+                        element: <M_Profile></M_Profile>
+                    },
+                    {
+                        path: "/mod-dashboard/manage-scholarship",
+                        element: <M_scholarship></M_scholarship>
+                    },
+                    {
+                        path: "/mod-dashboard/all-reviews",
+                        element: <All_Reviews></All_Reviews>
+                    },
+                    {
+                        path: "/mod-dashboard/all-application",
+                        element: <All_Apply></All_Apply>
+                    },
+                    {
+                        path: "/mod-dashboard/add-shcolarship",
+                        element: <Add_Schol></Add_Schol>
                     }
                 ]
             }
