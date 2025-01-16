@@ -5,7 +5,7 @@ const MyProfile = () => {
     const { user, loading } = useContext(AuthContext);
 
     return (
-        <div className='w-full h-full p-10'>
+        <div className='py-10 h-full w-11/12 mx-auto'>
             <div className="h-full bg-white rounded-xl p-4">
                 {
                     loading ? <div className="w-full h-full flex justify-center items-center"><span className="loading loading-bars text-warning loading-lg"></span></div> :

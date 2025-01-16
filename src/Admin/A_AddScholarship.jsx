@@ -1,5 +1,5 @@
 
-const AddScholarship = () => {
+const A_AddScholarship = () => {
     return (
         <div>
             sds
@@ -7,4 +7,4 @@ const AddScholarship = () => {
     );
 };
 
-export default AddScholarship;
+export default A_AddScholarship;

@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 
-const Dashboard = () => {
+const A_Dashboard = () => {
     const [menu, setMenu] = useState(false)
     return (
         <div className="w-full min-h-screen bg-orange-50">
@@ -72,4 +72,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default A_Dashboard;

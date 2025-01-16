@@ -1,6 +1,6 @@
 import React from 'react';
 
-const M_Application = () => {
+const A_M_Application = () => {
     return (
         <div>
             sffdvsdfv
@@ -8,4 +8,4 @@ const M_Application = () => {
     );
 };
 
-export default M_Application;
+export default A_M_Application;

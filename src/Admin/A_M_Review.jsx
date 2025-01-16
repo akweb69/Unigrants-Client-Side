@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Profile = () => {
+const A_M_Review = () => {
     return (
         <div>
-            dsfsd
+            reviews
         </div>
     );
 };
 
-export default Profile;
+export default A_M_Review;

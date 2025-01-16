@@ -33,6 +33,9 @@ const Navbar = () => {
                             user && user?.email ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/user-dashboard'}>Dashboard</NavLink> : ''
                         }
                         {
+                            user && user?.email ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/admin-dashboard'}> Admin Dashboard</NavLink> : ''
+                        }
+                        {
                             user && user?.email ? <div
                                 onClick={logout}
                                 className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem] cursor-pointer' >Logout</div> : ''

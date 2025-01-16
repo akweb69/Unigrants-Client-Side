@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ManageScholarship = () => {
+const A_ManageScholarship = () => {
     return (
         <div>
             safdsf
@@ -8,4 +8,4 @@ const ManageScholarship = () => {
     );
 };
 
-export default ManageScholarship;
+export default A_ManageScholarship;
