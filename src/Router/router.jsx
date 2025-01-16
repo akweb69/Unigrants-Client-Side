@@ -22,6 +22,7 @@ import M_scholarship from "../Moderator/M_scholarship";
 import All_Reviews from "../Moderator/All_Reviews";
 import All_Apply from "../Moderator/All_Apply";
 import Add_Schol from "../Moderator/Add_Schol";
+import Payment from "../Checkout/Payment";
 
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage></HomePage>
+            },
+            {
+                path: "/payment",
+                element: <Payment></Payment>
             },
             {
                 path: "/login",

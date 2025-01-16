@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -76,7 +76,8 @@ const S_Details = () => {
             </p>
 
             <div className="w-full flex justify-end">
-                <div className="btn bg-orange-500 text-white btn-error">Apply Scholarship</div>
+                <Link to={"/payment"}
+                    className="btn bg-orange-500 text-white btn-error">Apply Scholarship</Link>
             </div>
         </div>
     );
