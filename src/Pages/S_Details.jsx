@@ -11,7 +11,7 @@ const S_Details = () => {
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
     const [data, setData] = useState({})
-    const { universityImage, universityLogo, universityName, universityCity, universityCountry, scholarshipName, universityWorldRank, subjectCategory, applicationDeadline, scholarshipCategory, scholarshipDescription, scholarshipPostDate, serviceCharge, applicationFees, tuitionFees } = data
+    const { _id, universityImage, universityLogo, universityName, universityCity, universityCountry, scholarshipName, universityWorldRank, subjectCategory, applicationDeadline, scholarshipCategory, scholarshipDescription, scholarshipPostDate, serviceCharge, applicationFees, tuitionFees } = data
     useEffect(() => {
         axiosPublic.get(`singleScholarship/${id}`)
             .then(res => {
@@ -76,7 +76,7 @@ const S_Details = () => {
             </p>
 
             <div className="w-full flex justify-end">
-                <Link to={"/payment"}
+                <Link to={`/payment/${_id}`}
                     className="btn bg-orange-500 text-white btn-error">Apply Scholarship</Link>
             </div>
         </div>
