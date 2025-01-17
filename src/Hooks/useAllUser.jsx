@@ -14,7 +14,7 @@ const useAllUser = () => {
 
         }
     })
-    console.log(users)
+    console.log("useallusers--hooks--->", users)
     return [users]
 
 };

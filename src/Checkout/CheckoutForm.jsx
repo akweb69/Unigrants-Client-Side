@@ -6,6 +6,8 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import useAll_Schol from "../Hooks/useAll_Schol";
 import { useForm } from "react-hook-form";
+import useAllUser from "../Hooks/useAllUser";
+import axios from "axios";
 
 const CheckoutForm = ({ id }) => {
     const stripe = useStripe();
@@ -102,10 +104,49 @@ const CheckoutForm = ({ id }) => {
         setIsLoading(false);
     };
 
-    const { register, handleSubmit: formdata } = useForm()
+    const { register, handleSubmit: formdata, reset } = useForm()
+    const [users] = useAllUser();
+    const email = user?.email
+    const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        const user1 = users.filter(user => user.email === email)
+        const user_id = user1[0]?._id;
+        const user_email = user?.email;
+        const userName = user?.displayName;
+        const scholarship_id = id;
+        const date = new Date();
+        const today = date.toDateString()
+        const imgFile = { image: data.photo[0] }
+
+
+        const fullData = { ...data, user_id, userName, user_email, scholarship_id, apply_date: today }
         console.log(data)
+
+        const res = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbb_api_hosting_key}`, imgFile, {
+            headers: {
+                'content-type': "multipart/form-data"
+            }
+        })
+        if (res.data.success) {
+            const finalData = { ...fullData, photo: res.data.data.display_url }
+
+            axiosSecure.post("/applied-scholarship", finalData)
+                .then(res => {
+                    const data = res.data;
+                    if (data.insertedId) {
+                        toast.success("Successfully apply.")
+                        reset()
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                    toast.error(err)
+                })
+
+        }
+
+
     }
 
 
