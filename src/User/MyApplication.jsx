@@ -6,6 +6,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Heading from "../Utilities/Heading";
 
 
 const MyApplication = () => {
@@ -110,7 +111,8 @@ const MyApplication = () => {
 
 
     return (
-        <div className="w-full h-full py-10">
+        <div className="w-full h-full ">
+            <Heading one={"My Applications"}></Heading>
             {/* modal  reviews*/}
             {
                 reviewModal && <div className="w-full min-h-screen flex justify-center items-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm fixed top-0">

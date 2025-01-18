@@ -13,7 +13,7 @@ const useReviews = () => {
 
         }
     })
-    console.log(reviews)
+    console.log("from hooks-->", reviews)
     return [reviews]
 };
 
