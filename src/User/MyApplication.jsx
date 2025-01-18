@@ -106,7 +106,6 @@ const MyApplication = () => {
             .catch(err => {
                 console.log("from--->", err)
             })
-
     }
 
 
