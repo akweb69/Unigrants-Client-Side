@@ -2,9 +2,47 @@ import { FaTrashAlt } from "react-icons/fa";
 import { MdStar, MdDateRange } from "react-icons/md";
 import useReviews from "../Hooks/useReviews";
 import Heading from "../Utilities/Heading";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const All_Reviews = () => {
     const { reviews, refetch, isLoading } = useReviews();
+    const axiosSecure = useAxiosSecure();
+
+    const handleDeleteReview = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/delete_review/?id=${id}`)
+                    .then(res => {
+                        const data = res.data;
+                        console.log("from dleel-->", data)
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Review has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+
+
+            }
+        });
+
+    }
 
     return (
         <div className="w-full min-h-screen bg-gray-100 py-10">
@@ -65,7 +103,7 @@ const All_Reviews = () => {
 
                                     {/* Delete Button */}
                                     <button
-                                        onClick={() => handleDelete(item._id)} // Replace with your delete handler
+                                        onClick={() => handleDeleteReview(item._id)}
                                         className="flex items-center justify-center w-full py-2 text-red-500 border border-red-500 rounded-md hover:bg-red-50 transition-colors duration-300"
                                     >
                                         <FaTrashAlt className="mr-2" /> Delete Review
