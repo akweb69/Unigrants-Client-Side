@@ -6,7 +6,7 @@ const useAllApply = () => {
     const axiosPublic = useAxiosPublic()
 
 
-    const { data: applications = [] } = useQuery({
+    const { data: applications = [], refetch, isLoading } = useQuery({
         queryKey: ["applications"],
         queryFn: async () => {
             const res = await axiosPublic.get(`/all_applications`)
@@ -15,7 +15,7 @@ const useAllApply = () => {
         }
     })
     console.log(applications)
-    return [applications]
+    return [applications, refetch, isLoading]
 };
 
 export default useAllApply;

@@ -1,8 +1,138 @@
+import { MdOutlineDescription, MdPending } from "react-icons/md";
+import useAllApply from "../Hooks/useAllApply";
+import Heading from "../Utilities/Heading";
+import { CiEdit } from "react-icons/ci";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { FaCheckCircle } from "react-icons/fa";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const All_Apply = () => {
+
+    const [applications, refetch, isLoading] = useAllApply();
+    const [feedbackModal, setFeedbackModal] = useState(false)
+    const [feedback, setFeedback] = useState("");
+    const [id, setId] = useState("")
+    const axiosSecure = useAxiosSecure()
+
+
+    const handleModal = (id) => {
+        setFeedbackModal(true)
+        setId(id)
+
+    }
+    const handleFeedback = () => {
+        const data = { feedback }
+
+        axiosSecure.patch(`/add_feedback/?id=${id}`, data)
+            .then(res => {
+                const data = res.data
+                if (data.modifiedCount > 0) {
+                    toast.success("Added your feedback!")
+                    refetch();
+                    setFeedbackModal(false)
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+
     return (
-        <div>
-            apply
+        <div className="w-full min-h-screen">
+            {/* feedback modal */}
+            {
+                feedbackModal && <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2 lg:w-1/3">
+                        {/* content */}
+                        <label className="form-control w-full mb-5 ">
+                            <div className="label">
+                                <span className="label-text text-xl font-semibold font-logoFont">Give Feedback*</span>
+
+                            </div>
+                            <input
+                                onChange={(e) => setFeedback(e.target.value)}
+                                type="text" placeholder="Write Feedback here..." className="input input-warning input-bordered w-full" />
+
+                        </label>
+                        {/* btn */}
+                        <div className="w-full grid grid-cols-2 gap-4 items-center">
+                            <div onClick={() => setFeedbackModal(false)} className="btn btn-warning w-full">Close</div>
+                            <div onClick={() => handleFeedback()} className="btn btn-error w-full">Submit</div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+            <Heading one={"Manage Applications"}></Heading>
+            <div className="w-11/12 mx-auto">
+                <div className="overflow-x-auto">
+                    <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
+                        <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+                            <tr>
+                                <th className="border border-gray-300 px-4 py-2">Sl No</th>
+                                <th className="border border-gray-300 px-4 py-2">Applicant Name</th>
+                                <th className="border border-gray-300 px-4 py-2">Applicant Email</th>
+                                <th className="border border-gray-300 px-4 py-2">Scholarship Name</th>
+                                <th className="border border-gray-300 px-4 py-2">University Name</th>
+                                <th className="border border-gray-300 px-4 py-2">Application Fees</th>
+                                <th className="border border-gray-300 px-4 py-2">Status</th>
+                                <th className="border border-gray-300 px-4 py-2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white">
+                            {applications?.map((item, index) => (
+                                <tr key={index} className="hover:bg-gray-100">
+                                    <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{item?.data?.userName}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{item?.data?.user_email}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.scholarshipName}</td>
+                                    <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.universityName}</td>
+                                    <td className="border border-gray-300 px-4 py-2">${item?.schol_data?.applicationFees}</td>
+                                    <td className="border border-gray-300 px-4 py-2">
+                                        {item?.data?.status === "pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
+
+                                        {item?.data?.status === "processing" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
+
+                                        {item?.data?.status === "completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
+
+                                    </td>
+
+
+                                    <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
+                                        <Link to={`/s-details/${item?._id}`} className="tooltip" data-tip="View Details" >
+                                            <button
+                                                className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                <MdOutlineDescription></MdOutlineDescription>
+                                            </button>
+                                        </Link>
+
+                                        <div className="tooltip" data-tip="Feedback">
+                                            <button
+                                                onClick={() => handleModal(item?._id)}
+                                                className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                <CiEdit className="text-white font-bold"></CiEdit>
+                                            </button>
+                                        </div>
+
+                                        <div className="tooltip" data-tip="Cancel">
+                                            <button
+                                                className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                                <FaDeleteLeft></FaDeleteLeft>
+                                            </button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 };

@@ -215,7 +215,7 @@ const MyApplication = () => {
                                                 <td className="border border-gray-300 px-4 py-2">{idx + 1}</td>
                                                 <td className="border border-gray-300 px-4 py-2">{app?.schol_data?.universityName}</td>
                                                 <td className="border border-gray-300 px-4 py-2">{app?.schol_data?.universityCity} , {app?.schol_data?.universityCountry}</td>
-                                                <td className="border border-gray-300 px-4 py-2">todo</td>
+                                                <td className="border border-gray-300 px-4 py-2">{app?.feedback ? app?.feedback : "N/A"}</td>
                                                 <td className="border border-gray-300 px-4 py-2">{app?.schol_data?.subjectCategory}</td>
                                                 <td className="border border-gray-300 px-4 py-2">{app?.data?.degree}</td>
 
@@ -238,14 +238,14 @@ const MyApplication = () => {
                                                         Edit
                                                     </button>
                                                     <button
-                                                        onClick={() => handleCancelApplication(app._id)}
+                                                        onClick={() => handleCancelApplication(app?._id)}
                                                         className=" w-full px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
                                                         Cancel
                                                     </button>
                                                 </td>
                                                 <td className="border border-gray-300 px-4 py-2">
                                                     <button
-                                                        onClick={() => handleGiveReviewBtn(app._id)}
+                                                        onClick={() => handleGiveReviewBtn(app?._id)}
                                                         className=" w-full px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
                                                         Give Review
                                                     </button>
