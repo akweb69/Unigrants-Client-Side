@@ -8,26 +8,24 @@ const useApplyByUser = () => {
     const { user } = useContext(AuthContext);
     const email = user?.email;
 
-    // Conditionally run the query only if `email` is available
-    const { data: userApply = [], isLoading, isError, error } = useQuery(
-        ["userApply", email],
-        async () => {
+    const {
+        data: userApply = [],
+        isLoading,
+        isError,
+        error,
+        refetch,
+    } = useQuery({
+        queryKey: ["userApply", email],
+        queryFn: async () => {
             const res = await axiosPublic.get(`/all_userApply/?email=${email}`);
+
+            console.log(res.data)
             return res.data;
-        },
-        {
-            enabled: !!email, // Run the query only when `email` is defined
-            staleTime: 300000, // Cache data for 5 minutes
-            refetchOnWindowFocus: false, // Optional: Avoid unnecessary refetching on window focus
         }
-    );
+    });
 
-    // Log or handle errors (Optional)
-    if (isError) {
-        console.error("Error fetching user applications:", error);
-    }
-
-    return { userApply, isLoading, isError, error };
+    // Return refetch along with other data
+    return { userApply, isLoading, isError, error, refetch };
 };
 
 export default useApplyByUser;

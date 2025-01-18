@@ -8,6 +8,7 @@ import useAll_Schol from "../Hooks/useAll_Schol";
 import { useForm } from "react-hook-form";
 import useAllUser from "../Hooks/useAllUser";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ id }) => {
     const stripe = useStripe();
@@ -107,7 +108,8 @@ const CheckoutForm = ({ id }) => {
     const { register, handleSubmit: formdata, reset } = useForm()
     const [users] = useAllUser();
     const email = user?.email
-    const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
+    const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY;
+    const naviget = useNavigate()
 
     const onSubmit = async (data) => {
         const user1 = users.filter(user => user.email === email)
@@ -137,6 +139,7 @@ const CheckoutForm = ({ id }) => {
                     if (data.insertedId) {
                         toast.success("Successfully apply.")
                         reset()
+                        naviget("/user-dashboard/application")
                     }
                 })
                 .catch(err => {
