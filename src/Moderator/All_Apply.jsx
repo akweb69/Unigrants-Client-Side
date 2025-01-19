@@ -8,6 +8,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const All_Apply = () => {
 
@@ -38,6 +39,39 @@ const All_Apply = () => {
             .catch(err => {
                 console.log(err)
             })
+    }
+
+    const hanldeDeleteApplication = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Cancel it!",
+            cancelButtonText: "Close"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/deleteApplication/?id=${id}`)
+                    .then(res => {
+                        const data = res.data;
+                        if (data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Canceled!",
+                                text: "Application Has Been Canceled!.",
+                                icon: "success"
+                            });
+                            toast.success("Cancel Application success!")
+                        }
+                    })
+                    .catch(err => {
+                        console.log("form appl delete-->", err)
+                    })
+            }
+        });
+
     }
 
 
@@ -121,6 +155,7 @@ const All_Apply = () => {
 
                                         <div className="tooltip" data-tip="Cancel">
                                             <button
+                                                onClick={() => hanldeDeleteApplication(item?._id)}
                                                 className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
                                                 <FaDeleteLeft></FaDeleteLeft>
                                             </button>
