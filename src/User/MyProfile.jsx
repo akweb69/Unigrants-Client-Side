@@ -13,7 +13,7 @@ const MyProfile = () => {
             const matchedUser = users.find(hi => hi.email === user.email);
             const role = matchedUser?.role || "";
             setRole(role);
-            setShowRole(role === "admin" || role === "moderator");
+            setShowRole(role === "Admin" || role === "Moderator");
         }
     }, [users, user]);
 

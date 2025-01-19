@@ -2,9 +2,50 @@ import React from 'react';
 import Heading from '../Utilities/Heading';
 import useAllUser from '../Hooks/useAllUser';
 import Nodatapage from '../Utilities/Nodatapage';
+import toast from 'react-hot-toast';
+import useAxiosSecure from '../Hooks/useAxiosSecure';
 
 const A_M_Users = () => {
+    const axiosSecure = useAxiosSecure();
     const [users, refetch, isLoading] = useAllUser();
+
+    const moderatorRole = (id, e) => {
+
+        if (e.target.value === "Moderator") {
+
+            const role = "Moderator"
+            axiosSecure.patch(`/update_user_role/?id=${id}&role=${role}`)
+                .then(res => {
+                    const data = res.data;
+                    if (data.modifiedCount > 0) {
+                        toast.success("Role Updated Successfully!")
+                        refetch()
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+        if (e.target.value === "Admin") {
+            const role = "Admin"
+            axiosSecure.patch(`/update_user_role/?id=${id}&role=${role}`)
+                .then(res => {
+                    const data = res.data;
+                    if (data.modifiedCount > 0) {
+                        toast.success("Role Updated Successfully!")
+                        refetch()
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+
+
+
+
+    }
 
     return (
         <div className='w-full min-h-screen'>
@@ -34,8 +75,23 @@ const A_M_Users = () => {
                                                     users?.map((item, idx) => <tr className="" key={idx}>
                                                         <td className="border text-center py-2">{item?.name}</td>
                                                         <td className="border text-center py-2">{item?.email}</td>
-                                                        <td className="border text-center py-2">{item?.role}</td>
-                                                        <td className="border text-center py-2">Delete</td>
+                                                        <td
+                                                            className="border  h-full text-center py-2">
+                                                            <div className="w-full flex justify-center items-center px-5">
+                                                                <select
+                                                                    onChange={(e) => moderatorRole(item?._id, e)}
+                                                                    className='select select-warning bg-transparent  w-32' >
+                                                                    <option disabled value="User">{item?.role}</option>
+                                                                    <option
+                                                                        value="Moderator">Moderator</option>
+                                                                    <option value="Admin">Admin</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </td>
+
+                                                        <td className="border text-center py-2 ">
+                                                            <span className="btn btn-sm btn-warning">Delete</span> </td>
                                                     </tr>)
                                                 }
                                             </tbody>
