@@ -6,7 +6,7 @@ const useAllUser = () => {
     const axiosPublic = useAxiosPublic()
 
 
-    const { data: users = [] } = useQuery({
+    const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
             const res = await axiosPublic.get(`/users`)
@@ -15,7 +15,7 @@ const useAllUser = () => {
         }
     })
     console.log("useallusers--hooks--->", users)
-    return [users]
+    return [users, refetch, isLoading]
 
 };
 
