@@ -2,14 +2,16 @@ import { MdOutlineDescription, MdPending } from "react-icons/md";
 import useAllApply from "../Hooks/useAllApply";
 import Heading from "../Utilities/Heading";
 import { CiEdit } from "react-icons/ci";
-import { FaDeleteLeft } from "react-icons/fa6";
+import { FaDeleteLeft, FaEnvelope, FaGenderless, FaPhone, FaUserGraduate } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCalendarAlt, FaCheckCircle, FaMapMarkerAlt, FaUniversity } from "react-icons/fa";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import Nodatapage from "../Utilities/Nodatapage";
+import { BsPersonBadge } from "react-icons/bs";
+import { RxCross1 } from "react-icons/rx";
 
 const All_Apply = () => {
 
@@ -18,6 +20,8 @@ const All_Apply = () => {
     const [feedback, setFeedback] = useState("");
     const [id, setId] = useState("")
     const axiosSecure = useAxiosSecure()
+    const [deatilsModal, setDetailsModal] = useState(false);
+    const [detailsData, setDetailsData] = useState({})
 
 
     const handleModal = (id) => {
@@ -75,6 +79,13 @@ const All_Apply = () => {
 
     }
 
+    const handleDetails = (id) => {
+        setDetailsModal(true)
+        const data = applications.filter(hi => hi._id === id)[0];
+        setDetailsData(data)
+        console.log("form --details=-->", data)
+
+    }
 
     return (
         <div className="w-full min-h-screen">
@@ -98,6 +109,123 @@ const All_Apply = () => {
                             <div onClick={() => setFeedbackModal(false)} className="btn btn-warning w-full">Close</div>
                             <div onClick={() => handleFeedback()} className="btn btn-error w-full">Submit</div>
                         </div>
+                    </div>
+
+                </div>
+            }
+            {/* details modal */}
+            {
+                deatilsModal && <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white font-logoFont max-h-[80vh] overflow-y-scroll rounded-lg shadow-lg p-8 w-11/12 md:w-2/3 lg:w-1/2 relative">
+                        {/* Title */}
+                        <h1 className="text-3xl font-extrabold text-gray-800 mb-6 flex items-center">
+                            <BsPersonBadge className="text-blue-600 mr-3 " /> Application Details
+                        </h1>
+                        <div
+                            onClick={() => setDetailsModal(false)}
+                            className="text-2xl font-bold text-white p-2 bg-red-500 absolute top-2 cursor-pointer hover:bg-red-700  right-0 rounded-r-lg"><RxCross1></RxCross1></div>
+                        {/* Scholarship Details */}
+                        <div className="mb-8">
+                            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Scholarship Information</h2>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaUniversity className="text-blue-500 mr-3" />
+                                <strong className="mr-2">Scholarship:</strong> {detailsData?.schol_data?.scholarshipName}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaUniversity className="text-green-500 mr-3" />
+                                <strong className="mr-2">University:</strong> {detailsData?.schol_data?.universityName}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaMapMarkerAlt className="text-red-500 mr-3" />
+                                <strong className="mr-2">Location:</strong> {detailsData?.schol_data?.universityCity}, {detailsData?.schol_data?.universityCountry}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaUserGraduate className="text-purple-500 mr-3" />
+                                <strong className="mr-2">Category:</strong> {detailsData?.schol_data?.scholarshipCategory}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaUserGraduate className="text-orange-500 mr-3" />
+                                <strong className="mr-2">Degree:</strong> {detailsData?.schol_data?.degree}
+                            </p>
+                        </div>
+
+                        <hr className="border-gray-300 my-6" />
+
+                        {/* Applicant Info */}
+                        <h2 className="text-2xl font-semibold text-gray-700 mb-6">Applicant Information</h2>
+                        <div className="flex items-center gap-6 mb-8">
+                            <img
+                                src={detailsData?.data?.photo}
+                                alt="Applicant"
+                                className="w-20 h-20 rounded-full shadow-md"
+                            />
+                            <div>
+                                <p className="text-lg text-gray-700 flex items-center mb-2">
+                                    <BsPersonBadge className="text-blue-500 mr-3" />
+                                    <strong className="mr-2">Name:</strong> {detailsData?.data?.userName}
+                                </p>
+                                <p className="text-lg text-gray-700 flex items-center mb-2">
+                                    <FaEnvelope className="text-red-500 mr-3" />
+                                    <strong className="mr-2">Email:</strong> {detailsData?.data?.user_email}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Additional Info */}
+                        <div className="mb-8">
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaPhone className="text-green-500 mr-3" />
+                                <strong className="mr-2">Phone:</strong> {detailsData?.data?.phone}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaGenderless className="text-purple-500 mr-3" />
+                                <strong className="mr-2">Sex:</strong> {detailsData?.data?.gender}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-start mb-4">
+                                <FaMapMarkerAlt className="text-red-500 mr-3" />
+                                <strong className="mr-2">Address:</strong>
+                                <span className="ml-3">
+                                    <span className="block">Village: {detailsData?.data?.vill}</span>
+                                    <span className="block">District: {detailsData?.data?.dist}</span>
+                                    <span className="block">Country: {detailsData?.data?.country}</span>
+                                </span>
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaUserGraduate className="text-orange-500 mr-3" />
+                                <strong className="mr-2">Applied Degree:</strong> {detailsData?.data?.degree}
+                            </p>
+                            <p className="text-lg text-gray-700 flex items-center mb-2">
+                                <FaCalendarAlt className="text-blue-500 mr-3" />
+                                <strong className="mr-2">Applied Date:</strong> {detailsData?.data?.apply_date}
+                            </p>
+                        </div>
+
+                        {/* Academic Results */}
+                        <div className="mb-6">
+                            <h3 className="text-xl font-semibold text-gray-700 mb-4">Academic Results</h3>
+                            <table className="table-auto w-full border border-gray-300 rounded-lg">
+                                <thead>
+                                    <tr className="bg-gray-100 text-left text-gray-700">
+                                        <th className="px-4 py-2">Examination</th>
+                                        <th className="px-4 py-2">GPA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border px-4 py-2">HSC</td>
+                                        <td className="border px-4 py-2">{detailsData?.data?.hsc}</td>
+                                    </tr>
+                                    <tr className="bg-gray-50">
+                                        <td className="border px-4 py-2">SSC</td>
+                                        <td className="border px-4 py-2">{detailsData?.data?.ssc}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {/* button */}
+                        <div
+                            onClick={() => setDetailsModal(false)}
+                            className="btn btn-warning">Okey</div>
                     </div>
 
                 </div>
@@ -141,12 +269,13 @@ const All_Apply = () => {
 
 
                                         <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
-                                            <Link to={`/s-details/${item?._id}`} className="tooltip" data-tip="View Details" >
+                                            <div className="tooltip" data-tip="View Details" >
                                                 <button
+                                                    onClick={() => handleDetails(item?._id)}
                                                     className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                                                     <MdOutlineDescription></MdOutlineDescription>
                                                 </button>
-                                            </Link>
+                                            </div>
 
                                             <div className="tooltip" data-tip="Feedback">
                                                 <button

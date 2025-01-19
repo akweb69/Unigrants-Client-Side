@@ -4,6 +4,7 @@ import useReviews from "../Hooks/useReviews";
 import Heading from "../Utilities/Heading";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Nodatapage from "../Utilities/Nodatapage";
 
 const All_Reviews = () => {
     const { reviews, refetch, isLoading } = useReviews();
@@ -55,9 +56,7 @@ const All_Reviews = () => {
                 ) : (
                     // Handle no data
                     reviews?.length === 0 ? (
-                        <div className="w-full h-full py-14 flex justify-center items-center text-gray-500">
-                            No reviews available.
-                        </div>
+                        <Nodatapage one={"Opps! No Reviews  Available Yet."}></Nodatapage>
                     ) : (
                         <div className="w-full grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                             {reviews?.map((item, idx) => (

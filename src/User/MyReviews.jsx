@@ -5,6 +5,7 @@ import { AuthContext } from '../AuthContext/AuthProvider';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import Nodatapage from '../Utilities/Nodatapage';
 
 const MyReviews = () => {
 
@@ -12,6 +13,11 @@ const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const [resview, setReview] = useState([])
     const axiosSecure = useAxiosSecure()
+    const [reviewModal, setReviewModal] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('')
+    const [revi1, setRevi1] = useState({})
+
     useEffect(() => {
         const data = reviews.filter(hi => hi.user_email === user?.email)
         console.log(data)
@@ -48,10 +54,6 @@ const MyReviews = () => {
         });
     }
     // handle update review --->
-    const [reviewModal, setReviewModal] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('')
-    const [revi1, setRevi1] = useState({})
 
     const handleUpdateReview = (id) => {
         setReviewModal(true)
@@ -154,45 +156,48 @@ const MyReviews = () => {
 
                 </div>
             }
-            <div className="w-11/12 mx-auto">
-                <div className="overflow-x-auto">
-                    <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
-                        <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-                            <tr>
-                                <th className="border border-gray-300 px-4 py-2">Sl No</th>
-                                <th className="border border-gray-300 px-4 py-2">Scholarship Name</th>
-                                <th className="border border-gray-300 px-4 py-2">University Name</th>
-                                <th className="border border-gray-300 px-4 py-2">Review Comments</th>
-                                <th className="border border-gray-300 px-4 py-2">Review Date</th>
-                                <th className="border border-gray-300 px-4 py-2">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white">
-                            {resview.map((item, index) => (
-                                <tr key={index} className="hover:bg-gray-100">
-                                    <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{item?.scholarship_name}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{item?.university_name}</td>
-                                    <td className="border border-gray-300 px-4 py-2">{item?.comment.slice(0, 30)}...</td>
-                                    <td className="border border-gray-300 px-4 py-2">{item?.review_date}</td>
-                                    <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
-                                        <button
-                                            onClick={() => handleDeleteReview(item?._id)}
-                                            className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
-                                            Delete
-                                        </button>
-                                        <button
-                                            onClick={() => handleUpdateReview(item?._id)}
-                                            className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            {
+                resview.length === 0 ? <Nodatapage one={"Opps! You didn't post any review. "}></Nodatapage> :
+                    <div className="w-11/12 mx-auto">
+                        <div className="overflow-x-auto">
+                            <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
+                                <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+                                    <tr>
+                                        <th className="border border-gray-300 px-4 py-2">Sl No</th>
+                                        <th className="border border-gray-300 px-4 py-2">Scholarship Name</th>
+                                        <th className="border border-gray-300 px-4 py-2">University Name</th>
+                                        <th className="border border-gray-300 px-4 py-2">Review Comments</th>
+                                        <th className="border border-gray-300 px-4 py-2">Review Date</th>
+                                        <th className="border border-gray-300 px-4 py-2">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="bg-white">
+                                    {resview.map((item, index) => (
+                                        <tr key={index} className="hover:bg-gray-100">
+                                            <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
+                                            <td className="border border-gray-300 px-4 py-2">{item?.scholarship_name}</td>
+                                            <td className="border border-gray-300 px-4 py-2">{item?.university_name}</td>
+                                            <td className="border border-gray-300 px-4 py-2">{item?.comment.slice(0, 30)}...</td>
+                                            <td className="border border-gray-300 px-4 py-2">{item?.review_date}</td>
+                                            <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
+                                                <button
+                                                    onClick={() => handleDeleteReview(item?._id)}
+                                                    className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                                    Delete
+                                                </button>
+                                                <button
+                                                    onClick={() => handleUpdateReview(item?._id)}
+                                                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                    Edit
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            }
         </div>
     );
 };
