@@ -8,8 +8,8 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import axios from "axios";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const A_ManageScholarship = () => {
     const [scholarship, refetch] = useAll_Schol();
@@ -27,7 +27,7 @@ const A_ManageScholarship = () => {
     const onSubmit = async (data) => {
 
         const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
-        const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
+        const deadline = new Date(data.applicationDeadline).toLocaleDateString();
 
 
         // Add the URLs to your scholarship data
@@ -92,6 +92,37 @@ const A_ManageScholarship = () => {
         setDefaultValue(defaultData);
         setEditModal(true)
 
+    }
+    // delete                       
+    const handleDelte = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axiosPublic.delete(`delete_scholarship/?id=${id}`)
+                    .then(res => {
+                        const data = res.data;
+                        if (data.deletedCount > 0) {
+                            refetch()
+
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
+
+            }
+        });
     }
 
     return (
@@ -230,6 +261,7 @@ const A_ManageScholarship = () => {
                                             <span className="label-text">Deadline</span>
                                         </div>
                                         <input
+                                            required
                                             defaultValue={defaultValue?.applicationDeadline}
                                             {...register("applicationDeadline")} type="date" placeholder="Deadline" className="input input-bordered w-full " />
                                     </label>
@@ -313,6 +345,7 @@ const A_ManageScholarship = () => {
 
                                         <div className="tooltip" data-tip="Delete">
                                             <button
+                                                onClick={() => handleDelte(item?._id)}
                                                 className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
                                                 <FaDeleteLeft></FaDeleteLeft>
                                             </button>

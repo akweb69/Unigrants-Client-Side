@@ -28,7 +28,7 @@ const M_scholarship = () => {
     const onSubmit = async (data) => {
 
         const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
-        const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
+        const deadline = new Date(data.applicationDeadline).toLocaleDateString();
 
 
         // Add the URLs to your scholarship data
@@ -262,6 +262,7 @@ const M_scholarship = () => {
                                             <span className="label-text">Deadline</span>
                                         </div>
                                         <input
+                                            required
                                             defaultValue={defaultValue?.applicationDeadline}
                                             {...register("applicationDeadline")} type="date" placeholder="Deadline" className="input input-bordered w-full " />
                                     </label>
