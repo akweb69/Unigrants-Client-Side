@@ -25,6 +25,7 @@ import Add_Schol from "../Moderator/Add_Schol";
 import Payment from "../Checkout/Payment";
 import PrivateRoute from "../PrivateRout/PrivateRout";
 import ModeratorRout from "../PrivateRout/ModeratorRout";
+import AdminRout from "../PrivateRout/AdminRout";
 
 
 
@@ -80,31 +81,31 @@ const router = createBrowserRouter([
             // !-----Admin dashboard------
             , {
                 path: "/admin-dashboard",
-                element: <A_Dashboard></A_Dashboard>,
+                element: <AdminRout><A_Dashboard></A_Dashboard></AdminRout>,
                 children: [
                     {
                         path: "/admin-dashboard",
-                        element: <A_Profile></A_Profile>
+                        element: <AdminRout><A_Profile></A_Profile></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/add-scholarship",
-                        element: <A_AddScholarship></A_AddScholarship>
+                        element: <AdminRout><A_AddScholarship></A_AddScholarship></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/manage-shcolarship",
-                        element: <A_ManageScholarship></A_ManageScholarship>
+                        element: <AdminRout><A_ManageScholarship></A_ManageScholarship></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/manage-application",
-                        element: <A_M_Application></A_M_Application>
+                        element: <AdminRout><A_M_Application></A_M_Application></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/manage-users",
-                        element: <A_M_Users></A_M_Users>
+                        element: <AdminRout><A_M_Users></A_M_Users></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/manage-reviews",
-                        element: <A_M_Review></A_M_Review>
+                        element: <AdminRout><A_M_Review></A_M_Review></AdminRout>
                     }
                 ]
             },
