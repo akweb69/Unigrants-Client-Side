@@ -24,6 +24,7 @@ import All_Apply from "../Moderator/All_Apply";
 import Add_Schol from "../Moderator/Add_Schol";
 import Payment from "../Checkout/Payment";
 import PrivateRoute from "../PrivateRout/PrivateRout";
+import ModeratorRout from "../PrivateRout/ModeratorRout";
 
 
 
@@ -110,27 +111,27 @@ const router = createBrowserRouter([
             // !-----moderator routes----
             {
                 path: "/mod-dashboard",
-                element: <M_Dashboard></M_Dashboard>,
+                element: <ModeratorRout><M_Dashboard></M_Dashboard></ModeratorRout>,
                 children: [
                     {
                         path: "/mod-dashboard",
-                        element: <M_Profile></M_Profile>
+                        element: <ModeratorRout><M_Profile></M_Profile></ModeratorRout>
                     },
                     {
                         path: "/mod-dashboard/manage-scholarship",
-                        element: <M_scholarship></M_scholarship>
+                        element: <ModeratorRout><M_scholarship></M_scholarship></ModeratorRout>
                     },
                     {
                         path: "/mod-dashboard/all-reviews",
-                        element: <All_Reviews></All_Reviews>
+                        element: <ModeratorRout><All_Reviews></All_Reviews></ModeratorRout>
                     },
                     {
                         path: "/mod-dashboard/all-application",
-                        element: <All_Apply></All_Apply>
+                        element: <ModeratorRout><All_Apply></All_Apply></ModeratorRout>
                     },
                     {
                         path: "/mod-dashboard/add-shcolarship",
-                        element: <Add_Schol></Add_Schol>
+                        element: <ModeratorRout><Add_Schol></Add_Schol></ModeratorRout>
                     }
                 ]
             }
