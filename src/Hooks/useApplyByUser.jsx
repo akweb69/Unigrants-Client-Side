@@ -10,7 +10,7 @@ const useApplyByUser = () => {
 
     const {
         data: userApply = [],
-        isLoading,
+        isPending,
         isError,
         error,
         refetch,
@@ -25,7 +25,7 @@ const useApplyByUser = () => {
     });
 
     // Return refetch along with other data
-    return { userApply, isLoading, isError, error, refetch };
+    return { userApply, isPending, isError, error, refetch };
 };
 
 export default useApplyByUser;

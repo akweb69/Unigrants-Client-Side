@@ -12,24 +12,28 @@ const AdminRout = ({ children }) => {
     useEffect(() => {
         const dUser = users.filter(hi => hi.email === user?.email)[0]
         setRole(dUser?.role)
-    }, [users, isLoading, user])
+
+        // console.log("form---admin-->", dUser?.role)
+        // console.log(typeof ("fro---->", role))
 
 
-    if (loading) {
+    }, [users, user])
+
+    console.log(role, loading, user)
+
+    if (loading || isLoading || role !== "Admin") {
         return <div>Loading...</div>;
     }
 
 
-    if (!user && !user?.email) {
-        return <Navigate to="/login" replace />;
-    }
-    if (role !== "Admin") {
-        return <Navigate to="/login" replace />;
+    if (role === "Admin") {
+        return children
     }
 
-    if (role === "Admin") {
-        return children;
-    }
+
+
+
+    return <Navigate to="/login" replace />;
 };
 
 export default AdminRout;

@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import { useEffect } from "react";
 import useAllUser from "../Hooks/useAllUser";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
     // todo ---> responsivness
@@ -11,11 +12,24 @@ const Navbar = () => {
     const { user, logout, loading } = useContext(AuthContext);
     const [role, setRole] = useState("");
     const [users, refetch, isLoading] = useAllUser();
+    const navigate = useNavigate()
 
     useEffect(() => {
         const dUser = users.filter(hi => hi.email === user?.email)[0]
         setRole(dUser?.role)
     }, [users, isLoading, user])
+
+    const handleLogOut = () => {
+        logout()
+            .then(res => {
+                toast.success("Logout success!")
+                navigate("/")
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }
     return (
         <div className="w-full h-16 backdrop-blur-md">
             <div className="w-11/12  mx-auto h-full flex justify-between items-center">
@@ -42,7 +56,7 @@ const Navbar = () => {
                         }
                         {
                             user && user?.email ? <div
-                                onClick={logout}
+                                onClick={handleLogOut}
                                 className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem] cursor-pointer' >Logout</div> : ''
                         }
                         {

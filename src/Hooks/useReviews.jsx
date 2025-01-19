@@ -5,7 +5,7 @@ const useReviews = () => {
     const axiosPublic = useAxiosPublic()
 
 
-    const { data: reviews = [], refetch, isLoading } = useQuery({
+    const { data: reviews = [], refetch, isPending } = useQuery({
         queryKey: ["reviews"],
         queryFn: async () => {
             const res = await axiosPublic.get(`/reviews_all`)
@@ -14,7 +14,7 @@ const useReviews = () => {
         }
     })
     console.log("from hooks-->", reviews)
-    return { reviews, refetch, isLoading }
+    return { reviews, refetch, isPending }
 };
 
 export default useReviews;
