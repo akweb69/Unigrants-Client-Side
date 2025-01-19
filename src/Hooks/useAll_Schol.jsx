@@ -10,11 +10,11 @@ const useAll_Schol = () => {
         queryKey: ["scholarship"],
         queryFn: async () => {
             const res = await axiosPublic.get(`/all_Scholarship`)
-            return res.data
+            return res.data.data
 
         }
     })
-    console.log(scholarship)
+    // console.log("from hooks---sh->", scholarship)
     return [scholarship, refetch]
 
 };

@@ -88,7 +88,7 @@ const A_ManageScholarship = () => {
     ];
     // handle edite btn functionality
     const handleEditBtn = (id) => {
-        const defaultData = scholarship.filter(hi => hi._id === id)[0];
+        const defaultData = scholarship?.filter(hi => hi?._id === id)[0];
         setDefaultValue(defaultData);
         setEditModal(true)
 

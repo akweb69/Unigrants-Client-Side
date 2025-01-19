@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +17,6 @@ const Register = () => {
     const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
-    const [error, setError] = useState("")
 
 
     const onSubmit = async (data) => {
