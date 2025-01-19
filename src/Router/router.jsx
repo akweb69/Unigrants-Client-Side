@@ -23,6 +23,7 @@ import All_Reviews from "../Moderator/All_Reviews";
 import All_Apply from "../Moderator/All_Apply";
 import Add_Schol from "../Moderator/Add_Schol";
 import Payment from "../Checkout/Payment";
+import PrivateRoute from "../PrivateRout/PrivateRout";
 
 
 
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/s-details/:id",
-                element: <S_Details></S_Details>
+                element: <PrivateRoute><S_Details></S_Details></PrivateRoute>
             },
             {
                 path: "/all-scholarship",
@@ -58,19 +59,19 @@ const router = createBrowserRouter([
             // !-----user dashboard------
             {
                 path: "/user-dashboard",
-                element: <Dashboard></Dashboard>,
+                element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
                 children: [
                     {
                         path: "/user-dashboard",
-                        element: <MyProfile></MyProfile>
+                        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
                     },
                     {
                         path: "/user-dashboard/application",
-                        element: <MyApplication></MyApplication>
+                        element: <PrivateRoute><MyApplication></MyApplication></PrivateRoute>
                     },
                     {
                         path: "/user-dashboard/reviews",
-                        element: <MyReviews></MyReviews>
+                        element: <PrivateRoute> <MyReviews></MyReviews></PrivateRoute>
                     },
 
                 ]

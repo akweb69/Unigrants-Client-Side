@@ -26,6 +26,21 @@ const A_M_Users = () => {
                     console.log(err)
                 })
         }
+        if (e.target.value === "user") {
+
+            const role = "user"
+            axiosSecure.patch(`/update_user_role/?id=${id}&role=${role}`)
+                .then(res => {
+                    const data = res.data;
+                    if (data.modifiedCount > 0) {
+                        toast.success("Role Updated Successfully!")
+                        refetch()
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
 
         if (e.target.value === "Admin") {
             const role = "Admin"
@@ -79,9 +94,11 @@ const A_M_Users = () => {
                                                             className="border  h-full text-center py-2">
                                                             <div className="w-full flex justify-center items-center px-5">
                                                                 <select
+                                                                    defaultValue={item?.role}
                                                                     onChange={(e) => moderatorRole(item?._id, e)}
                                                                     className='select select-warning bg-transparent  w-32' >
-                                                                    <option disabled value="User">{item?.role}</option>
+
+                                                                    <option value="user">User</option>
                                                                     <option
                                                                         value="Moderator">Moderator</option>
                                                                     <option value="Admin">Admin</option>

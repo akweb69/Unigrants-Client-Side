@@ -1,19 +1,21 @@
 import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
-import axios from "axios";
 import { useEffect } from "react";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useAllUser from "../Hooks/useAllUser";
 
 const Navbar = () => {
     // todo ---> responsivness
-    const axiosPublic = useAxiosPublic()
-    useEffect(() => {
-        // axiosPublic.post("/add_Scholarship", { hi: "hgi" })
 
-    }, [])
     const [hover, setHover] = useState(false)
     const { user, logout, loading } = useContext(AuthContext);
+    const [role, setRole] = useState("");
+    const [users, refetch, isLoading] = useAllUser();
+
+    useEffect(() => {
+        const dUser = users.filter(hi => hi.email === user?.email)[0]
+        setRole(dUser?.role)
+    }, [users, isLoading, user])
     return (
         <div className="w-full h-16 backdrop-blur-md">
             <div className="w-11/12  mx-auto h-full flex justify-between items-center">
@@ -30,13 +32,13 @@ const Navbar = () => {
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/all-scholarship'}>All Scholarship</NavLink>
 
                         {
-                            user && user?.email ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/user-dashboard'}>Dashboard</NavLink> : ''
+                            user && user?.email && role === "user" ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/user-dashboard'}>Dashboard</NavLink> : ''
                         }
                         {
-                            user && user?.email ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/admin-dashboard'}> Admin Dashboard</NavLink> : ''
+                            user && user?.email && role === "Admin" ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/admin-dashboard'}> Admin Dashboard</NavLink> : ''
                         }
                         {
-                            user && user?.email ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/mod-dashboard'}> M. Dashboard</NavLink> : ''
+                            user && user?.email && role === "Moderator" ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/mod-dashboard'}> Moderator Dashboard</NavLink> : ''
                         }
                         {
                             user && user?.email ? <div
