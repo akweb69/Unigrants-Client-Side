@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,10 +13,11 @@ const Register = () => {
 
     const { setUser, user, createUserWithEmailAndPass, googleLogin, loading, setLoading } = useContext(AuthContext);
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: { errors }, } = useForm()
     const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
+    const [error, setError] = useState("")
 
 
     const onSubmit = async (data) => {
@@ -53,14 +54,18 @@ const Register = () => {
                     displayName: data.name, photoURL: "photo"
                 }).then(() => {
                     toast.success("Register success!")
+                    navigate("/")
                     setLoading(false)
+
                 }).catch((error) => {
                     console.log(error)
+                    toast.error("User email allready exist!")
                 });
             })
             .catch(err => {
                 setLoading(false)
                 console.log(err)
+                toast.error("User allready exist! , Try another one!")
             })
     }
     // on google or social login system
@@ -72,6 +77,7 @@ const Register = () => {
                 console.log("user--->", userData)
                 setUser(userData)
                 toast.success("Login success!")
+
                 const user = {
                     name: userData?.displayName,
                     email: userData?.email,
@@ -87,6 +93,7 @@ const Register = () => {
                         console.log(err)
                     })
 
+                navigate("/")
             })
             .catch(err => {
                 setLoading(false)
@@ -111,29 +118,64 @@ const Register = () => {
                                     <div className="label">
                                         <span className="label-text text-lg">User Name</span>
                                     </div>
-                                    <input {...register("name")} type="text" placeholder="Abu Kalam" className="input input-bordered w-full" />
+                                    <input required {...register("name")} type="text" placeholder="Abu Kalam" className="input input-bordered w-full" />
                                 </label>
                                 {/* email */}
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-lg">Email</span>
                                     </div>
-                                    <input {...register("email")} type="email" placeholder="example@gmail.com" className="input input-bordered w-full" />
+                                    <input required {...register("email")} type="email" placeholder="example@gmail.com" className="input input-bordered w-full" />
                                 </label>
                                 {/* password */}
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-lg">Password</span>
                                     </div>
-                                    <input {...register("password")} type="password" placeholder="password" className="input input-bordered w-full" />
+                                    <input
+                                        required
+                                        {...register("password", {
+                                            validate: {
+                                                hasUpperCase: (value) =>
+                                                    /[A-Z]/.test(value) || "Password must contain at least one capital letter (A-Z)",
+                                                hasNumber: (value) =>
+                                                    /\d/.test(value) || "Password must contain at least one number (0-9)",
+                                                hasSpecialChar: (value) =>
+                                                    /[@$!%*?&]/.test(value) || "Password must contain at least one special character (@, $, !, %, *, ?, &)",
+                                                minLength: (value) =>
+                                                    value.length >= 6 || "Password must be at least 6 characters long",
+                                            },
+                                        })}
+                                        type="password"
+                                        placeholder="Password"
+                                        className="input input-bordered w-full"
+                                    />
+
                                 </label>
+
+
+                                {errors.password?.type === "hasUpperCase" && (
+                                    <p className="text-red-500 pt-2 text-sm">Password must contain at least one capital letter (A-Z)</p>
+                                )}
+
+                                {errors.password?.type === "hasNumber" && (
+                                    <p className="text-red-500 pt-2 text-sm">Password must contain at least one number (0-9)</p>
+                                )}
+
+                                {errors.password?.type === "hasSpecialChar" && (
+                                    <p className="text-red-500 pt-2 text-sm">Password must contain at least one special character (@, $, !, %, *, ?, &)</p>
+                                )}
+
+                                {errors.password?.type === "minLength" && (
+                                    <p className="text-red-500 pt-2 text-sm">Password must be at least 6 characters long</p>
+                                )}
 
                                 {/* profile photo */}
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-lg">Profile Photo</span>
                                     </div>
-                                    <input {...register("photo")} type="file" className="file-input text-lg file-input-bordered w-full" />
+                                    <input required {...register("photo")} type="file" className="file-input text-lg file-input-bordered w-full" />
                                 </label>
                                 {/* btn */}
                                 <div className="my-5">
