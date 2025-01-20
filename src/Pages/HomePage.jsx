@@ -1,6 +1,7 @@
 import Banner from "../Components/Banner";
 import Benefits from "../Components/Benefits";
 import Blogs from "../Components/Blogs";
+import CTASection from "../Components/CTASection";
 import FAQ from "../Components/FAQ";
 import HowItWork from "../Components/HowItWork";
 import HowToApply from "../Components/HowToApply";
@@ -16,6 +17,7 @@ const HomePage = () => {
             <Blogs></Blogs>
             <Benefits></Benefits>
             <HowToApply></HowToApply>
+            <CTASection></CTASection>
             <FAQ></FAQ>
             <Newsletter></Newsletter>
         </div>
