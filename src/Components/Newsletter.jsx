@@ -10,22 +10,22 @@ const Newsletter = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r mt-14 from-blue-500 to-purple-600 text-white py-16 px-4">
-            <div className="max-w-lg mx-auto text-center">
+        <div className="bg-gradient-to-r mt-14 from-blue-500 to-purple-600 text-white py-16 px-4 font-logoFont">
+            <div className="w-11/12 mx-auto text-center">
                 {/* Title with gradient color */}
-                <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-500">
+                <h2 className="text-4xl md:text-6xl  font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-pink-500">
                     Subscribe to Our Newsletter
                 </h2>
-                <p className="mt-4 text-lg text-gray-200">
+                <p className="mt-4 text-lg sm:text-xl text-gray-200">
                     Stay updated with the latest news, blogs, and offers.
                 </p>
 
-                <form onSubmit={handleSubmit} className="flex justify-center items-center space-x-4 mt-8">
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
                     {/* Input field with a clean, modern look */}
-                    <div className="relative">
+                    <div className="relative w-full sm:w-72">
                         <input
                             type="email"
-                            className="p-4 pl-10 rounded-md w-72 focus:outline-none focus:ring-2 focus:ring-purple-300 bg-white text-black"
+                            className="p-4 pl-10 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-purple-300 bg-white text-black"
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -37,7 +37,7 @@ const Newsletter = () => {
                     {/* Subscribe button */}
                     <button
                         type="submit"
-                        className="bg-yellow-500 text-white py-3 px-6 rounded-md font-medium hover:bg-yellow-600 transition-all duration-300"
+                        className="bg-orange-500 text-white py-3 px-6 rounded-md font-medium hover:bg-orange-600 transition-all duration-300 w-full sm:w-auto"
                     >
                         Subscribe
                     </button>
