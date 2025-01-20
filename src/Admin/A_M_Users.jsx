@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Heading from '../Utilities/Heading';
 import useAllUser from '../Hooks/useAllUser';
 import Nodatapage from '../Utilities/Nodatapage';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 const A_M_Users = () => {
     const axiosSecure = useAxiosSecure();
     const [users, refetch, isLoading] = useAllUser();
+    const [allUsers, setAllUsers] = useState(users)
 
     const moderatorRole = (id, e) => {
 
@@ -84,23 +85,58 @@ const A_M_Users = () => {
                                 icon: "success"
                             });
                         }
-
                     })
                     .catch(err => {
                         toast.success(`Something went wrong try again letter!`)
                     })
-
-
             }
         });
 
 
 
     }
+    const handleSort = (value) => {
+
+        if (value === "Moderator") {
+            const filtered = users.filter(user => user.role === "Moderator")
+            setAllUsers(filtered)
+            return;
+        }
+
+        if (value === "Admin") {
+            const filtered = users.filter(user => user.role === "Admin")
+            setAllUsers(filtered)
+            return;
+        }
+
+        if (value === "User") {
+            const filtered = users.filter(user => user.role === "user")
+            setAllUsers(filtered)
+            return;
+        }
+
+        setAllUsers(users)
+
+
+
+
+        toast.success(` Sort By ${value} Role`)
+    }
 
     return (
         <div className='w-full min-h-screen'>
             <Heading one={"Manage Users"}></Heading>
+
+            <div className="flex w-11/12 mx-auto justify-end items-center mb-4">
+                <select
+                    onChange={(e) => handleSort(e.target.value)}
+                    className='select select-accent bg-transparent' name="sort">
+                    <option disabled selected value="">Sort By Default Role</option>
+                    <option value="Moderator">Sort By Moderator</option>
+                    <option value="Admin">Sort By Admin</option>
+                    <option value="User">Sort By User</option>
+                </select>
+            </div>
             <div className="w-11/12 mx-auto">
                 {
                     isLoading ? <div className="w-full min-h-[50vh] flex justify-center items-center">
@@ -108,9 +144,9 @@ const A_M_Users = () => {
                     </div> :
                         <div className="font-logoFont">
                             {
-                                users.length === 0 ? <Nodatapage one={"Opps! There is no user."}></Nodatapage> :
+                                allUsers.length === 0 ? <Nodatapage one={"Opps! There is no user."}></Nodatapage> :
 
-                                    <div className="overflow-x-auto">
+                                    <div className="overflow-x-auto bg-white">
                                         {/* Table */}
                                         <table className="table-auto w-full border-collapse border border-gray-300 rounded-lg">
                                             <thead className="bg-blue-500 text-gray-100">
@@ -123,7 +159,7 @@ const A_M_Users = () => {
                                             </thead>
                                             <tbody>
                                                 {
-                                                    users?.map((item, idx) => <tr className="" key={idx}>
+                                                    allUsers?.map((item, idx) => <tr className="" key={idx}>
                                                         <td className="border text-center py-2">{item?.name}</td>
                                                         <td className="border text-center py-2">{item?.email}</td>
                                                         <td
