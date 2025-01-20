@@ -5,14 +5,24 @@ import useAxiosPublic from '../Hooks/useAxiosPublic';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { IoLocation } from "react-icons/io5";
+import useReviews from '../Hooks/useReviews';
 
 
 const S_Details = () => {
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
     const [data, setData] = useState({})
+    const [reviewData, setReviewData] = useState([])
+
     const { _id, universityImage, universityLogo, universityName, universityCity, universityCountry, scholarshipName, universityWorldRank, subjectCategory, applicationDeadline, scholarshipCategory, scholarshipDescription, scholarshipPostDate, serviceCharge, applicationFees, tuitionFees } = data
+
+
+    const { reviews, refetch, isPending } = useReviews()
     useEffect(() => {
+
+        const review = reviews.filter(dd => dd.scholarship_id === _id)
+        setReviewData(review)
+
         axiosPublic.get(`singleScholarship/${id}`)
             .then(res => {
                 const data = res.data
@@ -22,11 +32,11 @@ const S_Details = () => {
             .catch(err => {
                 console.log(err)
             })
-    }, [])
+    }, [reviews])
 
 
     return (
-        <div className='w-11/12 mx-auto'>
+        <div className='w-11/12 mx-auto pb-14' >
             <div className="w-full h-[300px] md:h-[500px]">
                 <img className='w-full h-full object-cover' src={universityImage} alt="" />
             </div>
@@ -78,6 +88,16 @@ const S_Details = () => {
             <div className="w-full flex justify-end">
                 <Link to={`/payment/${_id}`}
                     className="btn bg-orange-500 text-white btn-error">Apply Scholarship</Link>
+            </div>
+
+            {/* comments */}
+            <div className="w-full border p-4 bg-white mt-10">
+                <h1 className="text-2xl md:text-4xl font-logoFont">Reviews</h1>
+                {
+                    reviewData.length > 0 ? reviewData.map((re, idx) => <div className="border p-2 py-4">
+
+                    </div>) : "nai"
+                }
             </div>
         </div>
     );
