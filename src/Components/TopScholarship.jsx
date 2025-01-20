@@ -7,7 +7,7 @@ const TopScholarship = () => {
     const [scholarship] = useScholarship()
 
     return (
-        <div className="w-full">
+        <div className="w-full bg-gradient-to-b from-blue-50 via-teal-100 font-logoFont to-blue-50">
             <Heading one={"Top Scholarship"} two={"Explore the Best Scholarships Tailored to Your Dreams and Goals."}></Heading>
             {/* main content */}
             <div className="w-11/12 mx-auto">

@@ -36,7 +36,7 @@ const blogsData = [
 
 const Blogs = () => {
     return (
-        <div className="w-full h-full">
+        <div className="w-full h-full bg-gradient-to-b from-blue-50 via-teal-100 font-logoFont to-blue-50">
             <Heading one={"Blogs & Articles"} two={"Explore the latest articles and insights"}></Heading>
             <div className="w-11/12 mx-auto">
                 {/* Blog cards */}

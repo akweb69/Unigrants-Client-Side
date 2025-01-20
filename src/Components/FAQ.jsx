@@ -53,7 +53,7 @@ const FAQ = () => {
     };
 
     return (
-        <div className="w-full h-full font-logoFont">
+        <div className="w-full h-full bg-gradient-to-b from-blue-50 via-teal-100 font-logoFont to-blue-50 ">
             <Heading one={"FAQ"} two={"Frequently Asked Questions"}></Heading>
             <div className="w-11/12 mx-auto flex flex-col lg:flex-row  gap-10 ">
                 {/* Left Side - Image */}
