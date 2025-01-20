@@ -58,16 +58,19 @@ const MyApplication = () => {
     }
     // ! reviews modal
     const [reviewModal, setReviewModal] = useState(false);
-    const [rating, setRating] = useState(2);
+    const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('')
     const [sc_id_data, setSc_id_data] = useState({})
+    const [schol_id, setSchol_id] = useState("")
 
     const handleRatingChange = (e) => {
         setRating(parseInt(e.target.value));
     }
 
     // ! open the modal
-    const handleGiveReviewBtn = (id) => {
+    const handleGiveReviewBtn = (id, sch_id) => {
+        console.log("sch-id======>", sch_id)
+        setSchol_id(sch_id)
         setReviewModal(true)
         const data = userApply.filter(hi => hi._id === id)
         const user_photo_url = data[0]?.data?.photo;
@@ -94,6 +97,24 @@ const MyApplication = () => {
             comment: comment,
             review_date: toady,
         }
+        // add rating to the scholarship data--->
+        axiosSecure.patch(`/update_rating_point/?id=${schol_id}&rating=${rating}`)
+            .then(res => {
+                const data = res.data;
+                console.log(data)
+            })
+            .catch(err => {
+                console.log("from rating update-->", err)
+            })
+
+
+
+
+
+
+
+
+
         axiosSecure.post("/reviews", finalReviewData)
             .then(res => {
                 const data = res.data;
@@ -245,7 +266,7 @@ const MyApplication = () => {
                                                 </td>
                                                 <td className="border border-gray-300 px-4 py-2">
                                                     <button
-                                                        onClick={() => handleGiveReviewBtn(app?._id)}
+                                                        onClick={() => handleGiveReviewBtn(app?._id, app?.data?.scholarship_id)}
                                                         className=" w-full px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
                                                         Give Review
                                                     </button>

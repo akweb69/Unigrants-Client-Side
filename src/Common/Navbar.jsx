@@ -50,7 +50,7 @@ const Navbar = () => {
 
     }
     return (
-        <div className={`${navBg ? " fixed w-full top-0 z-10" : ""} transition-all duration-300 h-16 backdrop-blur-md bg-orange-100`}>
+        <div className={`${navBg ? " fixed w-full top-0 z-10" : ""} transition-all duration-300 h-16 backdrop-blur-md bg-teal-100`}>
             <div className="w-11/12  mx-auto h-full flex justify-between items-center">
                 {/* left logo */}
                 <div className="">

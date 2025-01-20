@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import useScholarship from "../Hooks/useScholarship";
 import Heading from "../Utilities/Heading";
 import S_Card from "../Utilities/S_Card";
+import { Link } from "react-router-dom";
 
 const TopScholarship = () => {
     const [scholarship] = useScholarship()
@@ -15,6 +15,11 @@ const TopScholarship = () => {
                     {
                         scholarship?.slice(0, 6).map((item, idx) => <S_Card data={item} key={idx}></S_Card>)
                     }
+                </div>
+                <div className=" mt-10 text-center">
+                    <Link to={"/all-scholarship"} className="btn btn-warning text-white bg-orange-500">
+                        All Scholarship
+                    </Link>
                 </div>
             </div>
         </div>

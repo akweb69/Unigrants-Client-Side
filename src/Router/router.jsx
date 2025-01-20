@@ -30,6 +30,7 @@ import AllBlogs from "../Components/AllBogs";
 import HowToApply from "../Components/HowToApply";
 import About from "../Components/About";
 import Contact from "../Components/Contact";
+import NotFoundPage from "../Pages/NotFoundPage";
 
 
 
@@ -157,6 +158,10 @@ const router = createBrowserRouter([
                 ]
             }
         ]
+    },
+    {
+        path: "*",
+        element: <NotFoundPage></NotFoundPage>
     }
 ])
 

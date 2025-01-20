@@ -34,6 +34,8 @@ const A_Dashboard = () => {
                                 <ul>
                                     <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard"} className="btn rounded-none w-full  text-white btn-error">Admin Profile</NavLink></li>
 
+                                    <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/analytics"} className="btn rounded-none w-full  text-white btn-error">Analytics</NavLink></li>
+
                                     <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/add-scholarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
 
                                     <li onClick={() => setMenu(false)}><NavLink to={"/admin-dashboard/manage-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
@@ -65,15 +67,17 @@ const A_Dashboard = () => {
                         <ul className="space-y-1">
                             <li><NavLink to={"/admin-dashboard"} className="btn rounded-none w-full  text-white btn-error">Admin Profile</NavLink></li>
 
+                            <li><NavLink to={"/admin-dashboard/analytics"} className="btn rounded-none w-full  text-white btn-error">Analytics</NavLink></li>
+
                             <li><NavLink to={"/admin-dashboard/add-scholarship"} className="btn rounded-none w-full  text-white btn-error">Add Scholarship</NavLink></li>
 
                             <li><NavLink to={"/admin-dashboard/manage-shcolarship"} className="btn rounded-none w-full  text-white btn-error">Manage Scholarship</NavLink></li>
 
                             <li><NavLink to={"/admin-dashboard/manage-application"} className="btn rounded-none w-full  text-white btn-error">Manage Application</NavLink></li>
 
-                            <li><NavLink to={"/admin-dashboard/manage-users"} className="btn rounded-none w-full  text-white btn-error">Manage Users</NavLink></li>
-
                             <li><NavLink to={"/admin-dashboard/manage-reviews"} className="btn rounded-none w-full  text-white btn-error">Manage Reviews</NavLink></li>
+
+                            <li><NavLink to={"/admin-dashboard/manage-users"} className="btn rounded-none w-full  text-white btn-error">Manage Users</NavLink></li>
                         </ul>
                     </div>
                 </div>
