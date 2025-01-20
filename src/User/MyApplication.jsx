@@ -155,7 +155,7 @@ const MyApplication = () => {
                     refetch()
                     setSubmitLoading(false)
                     toast.success("Updated success!")
-                    setEditeData(false)
+                    setStatusPending(false)
                 }
 
             })
