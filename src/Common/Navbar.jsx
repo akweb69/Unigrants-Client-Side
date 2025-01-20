@@ -67,6 +67,7 @@ const Navbar = () => {
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/how_to_apply'}>How To Apply</NavLink>
 
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/all-scholarship'}>All Scholarship</NavLink>
+                        <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/about'}>About</NavLink>
 
                         {
                             user && user?.email && role === "user" ? <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/user-dashboard'}>Dashboard</NavLink> : ''

@@ -28,6 +28,8 @@ import ModeratorRout from "../PrivateRout/ModeratorRout";
 import AdminRout from "../PrivateRout/AdminRout";
 import AllBlogs from "../Components/AllBogs";
 import HowToApply from "../Components/HowToApply";
+import About from "../Components/About";
+import Contact from "../Components/Contact";
 
 
 
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
             {
                 path: "/how_to_apply",
                 element: <HowToApply></HowToApply>
+            },
+            {
+                path: "/about",
+                element: <About></About>
+            },
+            {
+                path: "/contact",
+                element: <Contact></Contact>
             },
             {
                 path: "/payment/:id",
