@@ -4,6 +4,7 @@ import useAllUser from '../Hooks/useAllUser';
 import Nodatapage from '../Utilities/Nodatapage';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 
 const A_M_Users = () => {
@@ -61,19 +62,40 @@ const A_M_Users = () => {
 
     // delete user ---->
     const handleDeleteUser = (id, user) => {
+        Swal.fire({
+            title: `Are you sure delete ${user}?`,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete user!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/delete_user_by_id/?id=${id}`)
+                    .then(res => {
+                        const data = res.data;
+                        if (data.deletedCount > 0) {
+                            toast.success(`Deleted User --> ${user} Successful!`)
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: `The user ${user} has been deleted.`,
+                                icon: "success"
+                            });
+                        }
 
-        axiosSecure.delete(`/delete_user_by_id/?id=${id}`)
-            .then(res => {
-                const data = res.data;
-                if (data.deletedCount > 0) {
-                    toast.success(`Deleted User --> ${user} Successful!`)
-                    refetch()
-                }
+                    })
+                    .catch(err => {
+                        toast.success(`Something went wrong try again letter!`)
+                    })
 
-            })
-            .catch(err => {
-                toast.success(`Something went wrong try again letter!`)
-            })
+
+            }
+        });
+
+
+
     }
 
     return (
