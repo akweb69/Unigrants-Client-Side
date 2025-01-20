@@ -31,6 +31,7 @@ import HowToApply from "../Components/HowToApply";
 import About from "../Components/About";
 import Contact from "../Components/Contact";
 import NotFoundPage from "../Pages/NotFoundPage";
+import Statistics from "../Pages/Statistics";
 
 
 
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
                     {
                         path: "/admin-dashboard/add-scholarship",
                         element: <AdminRout><A_AddScholarship></A_AddScholarship></AdminRout>
+                    },
+                    {
+                        path: "/admin-dashboard/analytics",
+                        element: <AdminRout><Statistics></Statistics></AdminRout>
                     },
                     {
                         path: "/admin-dashboard/manage-shcolarship",

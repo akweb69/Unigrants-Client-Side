@@ -106,20 +106,18 @@ const A_M_Users = () => {
         if (value === "Admin") {
             const filtered = users.filter(user => user.role === "Admin")
             setAllUsers(filtered)
+            toast.success(` Sort By ${value} Role`)
             return;
         }
 
         if (value === "User") {
             const filtered = users.filter(user => user.role === "user")
             setAllUsers(filtered)
+            toast.success(` Sort By ${value} Role`)
             return;
         }
 
         setAllUsers(users)
-
-
-
-
         toast.success(` Sort By ${value} Role`)
     }
 
