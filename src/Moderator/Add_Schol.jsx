@@ -1,29 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
-const Add_Schol = () => {
+const A_AddScholarship = () => {
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const { user } = useContext(AuthContext);
     const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
-
+    const [isLoading, setIsloading] = useState(false)
     const date = new Date()
     const today = date.toLocaleDateString()
     const email = user?.email;
     const axiosPublic = useAxiosPublic();
 
     const onSubmit = async (data) => {
-        // convert in number formate
-        const universityWorldRank = parseFloat(data.universityWorldRank)
-        const tuitionFees = parseFloat(data.tuitionFees)
-        const applicationFees = parseFloat(data.applicationFees)
-        const serviceCharge = parseFloat(data.serviceCharge)
-
-        const scholarshipData = { ...data, universityWorldRank: universityWorldRank, tuitionFees: tuitionFees, postedUserEmail: email, scholarshipPostDate: today, applicationFees: applicationFees, serviceCharge: serviceCharge }
+        setIsloading(true)
+        const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
 
         const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
         // ! upload image on imgbb hosting site
@@ -71,9 +66,13 @@ const Add_Schol = () => {
             .then(res => {
                 const data = res.data;
                 toast.success("Your Scholarship Added successfully!")
+                setIsloading(false)
+                reset()
             })
             .catch(err => {
                 console.log(err)
+                setIsloading(false)
+                toast.error("Something Went Wrong Try Again letter ")
             })
 
     }
@@ -250,7 +249,10 @@ const Add_Schol = () => {
                     <button
                         className="w-full text-center py-3 text-white text-xl font-logoFont font-semibold bg-orange-500 rounded-lg hover:bg-orange-400 active:bg-orange-700 shadow-lg transition-all duration-300 ease-in-out transform hover:scale-y-105 active:scale-95 border-2 border-orange-600 hover:border-orange-400"
                     >
-                        Add Scholarship
+                        {isLoading ? <div className="w-full h-full flex gap-2 justify-center items-center ">
+                            <p className="text-white">Processing...</p>
+                            <span className="loading loading-bars loading-md text-accent"></span>
+                        </div> : "Add New Scholarship"}
                     </button>
 
                 </div>
@@ -260,4 +262,4 @@ const Add_Schol = () => {
     );
 };
 
-export default Add_Schol;
+export default A_AddScholarship;
