@@ -1,7 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const S_Card = ({ data }) => {
-    const { _id, universityLogo, universityName, universityCountry, scholarshipName, universityCity, scholarshipCategory, subjectCategory, applicationDeadline, applicationFees, } = data
+
+
+
+    const { _id, universityLogo, universityName, universityCountry, scholarshipName, universityCity, scholarshipCategory, subjectCategory, applicationDeadline, applicationFees, ratings } = data
+
+    const [rate, setRate] = useState(0)
+    useEffect(() => {
+
+        const total = ratings.reduce((sum, rating) => sum + rating, 0);
+        const average = total / ratings.length;
+        setRate(average)
+        console.log("Average Rating:", average);
+    }, [ratings]);
+
+
     return (
         <div className="w-full border h-full p-4 rounded-xl flex flex-col justify-between hover:shadow-md bg-white">
             <div className="">
@@ -20,6 +35,7 @@ const S_Card = ({ data }) => {
                         <p className=" font-bold font-logoFont text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text">Deadline : {applicationDeadline}</p>
                         <p className="md:text-xl font-bold font-logoFont text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text">Fees : ${applicationFees}</p>
                     </div>
+                    <p className="font-logoFont md:text-xl font-bold text-orange-500">Rating: {rate} / 5.00</p>
                 </div>
             </div>
             {/* button */}
