@@ -2,6 +2,7 @@ import About from "../Components/About";
 import Banner from "../Components/Banner";
 import Benefits from "../Components/Benefits";
 import Blogs from "../Components/Blogs";
+import Colaborate from "../Components/Colaborate";
 import Contact from "../Components/Contact";
 import CTASection from "../Components/CTASection";
 import FAQ from "../Components/FAQ";
@@ -23,6 +24,7 @@ const HomePage = () => {
             <CTASection></CTASection>
             <FAQ></FAQ>
             <Contact></Contact>
+            <Colaborate></Colaborate>
             <Newsletter></Newsletter>
         </div>
     );
