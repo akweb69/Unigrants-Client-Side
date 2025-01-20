@@ -3,9 +3,8 @@ import useAllApply from "../Hooks/useAllApply";
 import Heading from "../Utilities/Heading";
 import { CiEdit } from "react-icons/ci";
 import { FaDeleteLeft, FaEnvelope, FaGenderless, FaPhone, FaUserGraduate } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 import { FaCalendarAlt, FaCheckCircle, FaMapMarkerAlt, FaUniversity } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -13,7 +12,7 @@ import Nodatapage from "../Utilities/Nodatapage";
 import { BsPersonBadge } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 
-const All_Apply = () => {
+const A_M_Application = () => {
 
     const [applications, refetch, isLoading] = useAllApply();
     const [feedbackModal, setFeedbackModal] = useState(false)
@@ -58,22 +57,24 @@ const All_Apply = () => {
             cancelButtonText: "Close"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/deleteApplication/?id=${id}`)
+                const value = "Rejected"
+                axiosSecure.patch(`/update_the_status/?id=${id}&value=${value}`)
                     .then(res => {
-                        const data = res.data;
-                        if (data.deletedCount > 0) {
-                            refetch()
-                            Swal.fire({
-                                title: "Canceled!",
-                                text: "Application Has Been Canceled!.",
-                                icon: "success"
-                            });
-                            toast.success("Cancel Application success!")
-                        }
+                        const data = res.data
+                        console.log(data)
+                        refetch()
+                        Swal.fire({
+                            title: "Canceled!",
+                            text: "Application Has Been Canceled!.",
+                            icon: "success"
+                        });
+                        toast.success(`Updated statsu success to ${value}`)
                     })
                     .catch(err => {
-                        console.log("form appl delete-->", err)
+                        console.log(err)
                     })
+
+
             }
         });
 
@@ -84,7 +85,51 @@ const All_Apply = () => {
         const data = applications.filter(hi => hi._id === id)[0];
         setDetailsData(data)
         console.log("form --details=-->", data)
+    }
+    const [allData, setAllData] = useState([])
+    useEffect(() => {
+        setAllData(applications)
+    }, [applications])
 
+    const handleSorting = (e) => {
+        toast.success(`Sorted by ${e}`)
+        if (e === "applied_date") {
+            const newData = applications.sort((a, b) => {
+                const dateA = (a.data.apply_date);
+                const dateB = (b.data.apply_date);
+                return dateA - dateB;
+            });
+            setAllData(newData)
+        }
+        if (e === "deadline") {
+            const newData = applications.sort((a, b) => {
+                const dateA = (a.schol_data.applicationDeadline);
+                const dateB = (b.schol_data.applicationDeadline);
+                return dateA - dateB;
+            });
+
+            setAllData(newData)
+        }
+        else {
+
+            setAllData(applications)
+        }
+
+    }
+    // updating status---->
+    const handelUpdateStatuss = (value, id) => {
+
+
+        axiosSecure.patch(`/update_the_status/?id=${id}&value=${value}`)
+            .then(res => {
+                const data = res.data
+                console.log(data)
+                refetch()
+                toast.success(`Updated statsu success to ${value}`)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
@@ -232,77 +277,110 @@ const All_Apply = () => {
             }
 
             <Heading one={"Manage Applications"}></Heading>
-
-            {
-                applications.length === 0 ? <Nodatapage one={"Opp!  No Available Application Yet."}></Nodatapage> : <div className="w-11/12 mx-auto">
-                    <div className="overflow-x-auto">
-                        <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
-                            <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-                                <tr>
-                                    <th className="border border-gray-300 px-4 py-2">Sl No</th>
-                                    <th className="border border-gray-300 px-4 py-2">Applicant Name</th>
-                                    <th className="border border-gray-300 px-4 py-2">Applicant Email</th>
-                                    <th className="border border-gray-300 px-4 py-2">Scholarship Name</th>
-                                    <th className="border border-gray-300 px-4 py-2">University Name</th>
-                                    <th className="border border-gray-300 px-4 py-2">Application Fees</th>
-                                    <th className="border border-gray-300 px-4 py-2">Status</th>
-                                    <th className="border border-gray-300 px-4 py-2">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white">
-                                {applications?.map((item, index) => (
-                                    <tr key={index} className="hover:bg-gray-100">
-                                        <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
-                                        <td className="border border-gray-300 px-4 py-2">{item?.data?.userName}</td>
-                                        <td className="border border-gray-300 px-4 py-2">{item?.data?.user_email}</td>
-                                        <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.scholarshipName}</td>
-                                        <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.universityName}</td>
-                                        <td className="border border-gray-300 px-4 py-2">${item?.schol_data?.applicationFees}</td>
-                                        <td className="border border-gray-300 px-4 py-2">
-                                            {item?.data?.status === "pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
-
-                                            {item?.data?.status === "processing" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
-
-                                            {item?.data?.status === "completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
-
-                                        </td>
-
-
-                                        <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
-                                            <div className="tooltip" data-tip="View Details" >
-                                                <button
-                                                    onClick={() => handleDetails(item?._id)}
-                                                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                                                    <MdOutlineDescription></MdOutlineDescription>
-                                                </button>
-                                            </div>
-
-                                            <div className="tooltip" data-tip="Feedback">
-                                                <button
-                                                    onClick={() => handleModal(item?._id)}
-                                                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                                                    <CiEdit className="text-white font-bold"></CiEdit>
-                                                </button>
-                                            </div>
-
-                                            <div className="tooltip" data-tip="Cancel">
-                                                <button
-                                                    onClick={() => hanldeDeleteApplication(item?._id)}
-                                                    className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
-                                                    <FaDeleteLeft></FaDeleteLeft>
-                                                </button>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+            {/* sorting  */}
+            <div className="w-full flex justify-center pb-6">
+                <div className=" w-52  mx-auto ">
+                    <select
+                        onChange={(e) => handleSorting(e.target.value)}
+                        defaultValue={"default"}
+                        name="sort" className=" w-full select select-warning bg-transparent">
+                        <option value="default">Sorted By Default</option>
+                        <option value="applied_date">Sorted By Applied Date</option>
+                        <option value="deadline">Sorted By Deadline</option>
+                    </select>
                 </div>
-            }
+            </div>
+
+            <div className="">
+                {
+                    isLoading ? <div className="w-full flex justify-center items-center py-14">
+                        <div className="loading-bars text-warning loading-lg"></div>:
+                    </div> :
+                        <div className="">
+                            {
+                                applications.length === 0 ? <Nodatapage one={"Opp!  No Available Application Yet."}></Nodatapage> : <div className="w-11/12 mx-auto">
+                                    <div className="overflow-x-auto">
+                                        <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
+                                            <thead className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
+                                                <tr>
+                                                    <th className="border border-gray-300 px-4 py-2">Sl No</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Applicant Name</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Applicant Email</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Scholarship Name</th>
+                                                    <th className="border border-gray-300 px-4 py-2">University Name</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Application Fees</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Status</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Update Status</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="bg-white">
+                                                {allData?.map((item, index) => (
+                                                    <tr key={index} className="hover:bg-gray-100">
+                                                        <td className="border border-gray-300 px-4 py-2 text-center">{index + 1}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">{item?.data?.userName}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">{item?.data?.user_email}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.scholarshipName}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.universityName}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">${item?.schol_data?.applicationFees}</td>
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            {item?.data?.status === "Pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
+
+                                                            {item?.data?.status === "Processing" && <span className="px-3 py-1 bg-blue-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
+
+                                                            {item?.data?.status === "Completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
+
+                                                            {item?.data?.status === "Rejected" && <span className="px-3 py-1 bg-red-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Rejected</span>}
+
+                                                        </td>
+                                                        {/* status update */}
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            <select className="bg-transparent p-2 select-accent" name="status" onChange={(e) => handelUpdateStatuss(e.target.value, item?._id)}>
+
+                                                                <option disabled selected value="">Update The Status</option>
+                                                                <option value="Processing">Processing</option>
+                                                                <option value="Completed">Completed</option>
+                                                            </select>
+                                                        </td>
+                                                        {/* action buttons */}
+                                                        <td className="border border-gray-300 px-4 py-2 flex justify-center h-full items-center space-x-2">
+                                                            <div className="tooltip" data-tip="View Details" >
+                                                                <button
+                                                                    onClick={() => handleDetails(item?._id)}
+                                                                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                                    <MdOutlineDescription></MdOutlineDescription>
+                                                                </button>
+                                                            </div>
+
+                                                            <div className="tooltip" data-tip="Feedback">
+                                                                <button
+                                                                    onClick={() => handleModal(item?._id)}
+                                                                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                                    <CiEdit className="text-white font-bold"></CiEdit>
+                                                                </button>
+                                                            </div>
+
+                                                            <div className="tooltip" data-tip="Cancel">
+                                                                <button
+                                                                    onClick={() => hanldeDeleteApplication(item?._id)}
+                                                                    className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                                                    <FaDeleteLeft></FaDeleteLeft>
+                                                                </button>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                }
+            </div>
         </div>
     );
 };
 
-export default All_Apply;
+export default A_M_Application;
