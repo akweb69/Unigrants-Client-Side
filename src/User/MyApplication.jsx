@@ -82,7 +82,7 @@ const MyApplication = () => {
         const user_email = data[0]?.data?.user_email;
         const university_name = data[0]?.schol_data?.universityName;
         const scholarship_name = data[0]?.schol_data?.scholarshipName;
-        const scholarship_id = id
+        const scholarship_id = sch_id
 
         const initialData = {
             user_photo_url, user_name, user_email, university_name, scholarship_name, scholarship_id

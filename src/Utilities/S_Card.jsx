@@ -12,7 +12,13 @@ const S_Card = ({ data }) => {
 
         const total = ratings.reduce((sum, rating) => sum + rating, 0);
         const average = total / ratings.length;
-        setRate(average)
+        if (ratings.length === 0) {
+            setRate(0)
+        }
+        else {
+            setRate(average)
+        }
+
         console.log("Average Rating:", average);
     }, [ratings]);
 

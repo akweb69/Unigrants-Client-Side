@@ -32,7 +32,7 @@ const S_Details = () => {
             .catch(err => {
                 console.log(err)
             })
-    }, [reviews])
+    }, [reviews, _id])
 
 
     return (
@@ -94,9 +94,23 @@ const S_Details = () => {
             <div className="w-full border p-4 bg-white mt-10">
                 <h1 className="text-2xl md:text-4xl font-logoFont">Reviews</h1>
                 {
-                    reviewData.length > 0 ? reviewData.map((re, idx) => <div className="border p-2 py-4">
-
-                    </div>) : "nai"
+                    reviewData.length > 0 ? reviewData.map((re, idx) => <div className="border font-logoFont p-2 py-4">
+                        <div className="flex gap-3 items-center">
+                            <div className="w-14 h-14 rounded-full">
+                                <img className='w-full h-full rounded-full' referrerPolicy='no-referrer' src={re?.user_photo_url} alt="" />
+                            </div>
+                            <div className="">
+                                <p className="text-lg md:text-xl font-bold">{re?.user_name}</p>
+                                <p className="text-xs md:text-sm">{re?.user_email}</p>
+                            </div>
+                        </div>
+                        <div className="">
+                            <p className="text-lg font-bold text-orange-800">Rate: {re?.rating} / 5.0</p>
+                            <p className="text-xs">Date:{re?.review_date}</p>
+                        </div>
+                        <p className="">Review: {re?.comment}</p>
+                    </div>)
+                        : "No reviews available"
                 }
             </div>
         </div>
