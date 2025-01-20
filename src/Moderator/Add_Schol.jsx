@@ -6,7 +6,6 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 
 const A_AddScholarship = () => {
-
     const { register, handleSubmit, reset } = useForm()
     const { user } = useContext(AuthContext);
     const imgbb_api_hosting_key = import.meta.env.VITE_IMGBB_API_KEY
@@ -19,7 +18,6 @@ const A_AddScholarship = () => {
     const onSubmit = async (data) => {
         setIsloading(true)
         const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
-
         const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
         // ! upload image on imgbb hosting site
         // Create FormData for each file

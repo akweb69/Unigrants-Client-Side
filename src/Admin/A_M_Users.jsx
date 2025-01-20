@@ -5,6 +5,7 @@ import Nodatapage from '../Utilities/Nodatapage';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
 
+
 const A_M_Users = () => {
     const axiosSecure = useAxiosSecure();
     const [users, refetch, isLoading] = useAllUser();
@@ -56,10 +57,23 @@ const A_M_Users = () => {
                     console.log(err)
                 })
         }
+    }
 
+    // delete user ---->
+    const handleDeleteUser = (id, user) => {
 
+        axiosSecure.delete(`/delete_user_by_id/?id=${id}`)
+            .then(res => {
+                const data = res.data;
+                if (data.deletedCount > 0) {
+                    toast.success(`Deleted User --> ${user} Successful!`)
+                    refetch()
+                }
 
-
+            })
+            .catch(err => {
+                toast.success(`Something went wrong try again letter!`)
+            })
     }
 
     return (
@@ -108,7 +122,9 @@ const A_M_Users = () => {
                                                         </td>
 
                                                         <td className="border text-center py-2 ">
-                                                            <span className="btn btn-sm btn-warning">Delete</span> </td>
+                                                            <span
+                                                                onClick={() => handleDeleteUser(item?._id, item?.name)}
+                                                                className="btn btn-sm btn-warning">Delete</span> </td>
                                                     </tr>)
                                                 }
                                             </tbody>
