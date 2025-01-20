@@ -27,6 +27,7 @@ import PrivateRoute from "../PrivateRout/PrivateRout";
 import ModeratorRout from "../PrivateRout/ModeratorRout";
 import AdminRout from "../PrivateRout/AdminRout";
 import AllBlogs from "../Components/AllBogs";
+import HowToApply from "../Components/HowToApply";
 
 
 
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/all_blogs",
                 element: <AllBlogs></AllBlogs>
+            },
+            {
+                path: "/how_to_apply",
+                element: <HowToApply></HowToApply>
             },
             {
                 path: "/payment/:id",

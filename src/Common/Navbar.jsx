@@ -63,6 +63,9 @@ const Navbar = () => {
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/'}>Home</NavLink>
 
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/all_blogs'}>Blogs</NavLink>
+
+                        <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/how_to_apply'}>How To Apply</NavLink>
+
                         <NavLink className='hover:bg-orange-400 hover:text-white rounded-sm px-[0.75rem] py-[0.5rem]' to={'/all-scholarship'}>All Scholarship</NavLink>
 
                         {
