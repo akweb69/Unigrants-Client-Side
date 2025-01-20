@@ -26,6 +26,7 @@ import Payment from "../Checkout/Payment";
 import PrivateRoute from "../PrivateRout/PrivateRout";
 import ModeratorRout from "../PrivateRout/ModeratorRout";
 import AdminRout from "../PrivateRout/AdminRout";
+import AllBlogs from "../Components/AllBogs";
 
 
 
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage></HomePage>
+            },
+            {
+                path: "/all_blogs",
+                element: <AllBlogs></AllBlogs>
             },
             {
                 path: "/payment/:id",
