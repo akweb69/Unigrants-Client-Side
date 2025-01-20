@@ -78,8 +78,6 @@ const Banner = () => {
                                 </div>
                             </div>
                         </div>
-
-
                     </Slider>
                 </div>
 
