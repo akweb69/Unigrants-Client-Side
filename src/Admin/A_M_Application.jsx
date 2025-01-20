@@ -57,22 +57,24 @@ const A_M_Application = () => {
             cancelButtonText: "Close"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/deleteApplication/?id=${id}`)
+                const value = "Rejected"
+                axiosSecure.patch(`/update_the_status/?id=${id}&value=${value}`)
                     .then(res => {
-                        const data = res.data;
-                        if (data.deletedCount > 0) {
-                            refetch()
-                            Swal.fire({
-                                title: "Canceled!",
-                                text: "Application Has Been Canceled!.",
-                                icon: "success"
-                            });
-                            toast.success("Cancel Application success!")
-                        }
+                        const data = res.data
+                        console.log(data)
+                        refetch()
+                        Swal.fire({
+                            title: "Canceled!",
+                            text: "Application Has Been Canceled!.",
+                            icon: "success"
+                        });
+                        toast.success(`Updated statsu success to ${value}`)
                     })
                     .catch(err => {
-                        console.log("form appl delete-->", err)
+                        console.log(err)
                     })
+
+
             }
         });
 
@@ -113,6 +115,21 @@ const A_M_Application = () => {
             setAllData(applications)
         }
 
+    }
+    // updating status---->
+    const handelUpdateStatuss = (value, id) => {
+
+
+        axiosSecure.patch(`/update_the_status/?id=${id}&value=${value}`)
+            .then(res => {
+                const data = res.data
+                console.log(data)
+                refetch()
+                toast.success(`Updated statsu success to ${value}`)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
@@ -293,6 +310,7 @@ const A_M_Application = () => {
                                                     <th className="border border-gray-300 px-4 py-2">University Name</th>
                                                     <th className="border border-gray-300 px-4 py-2">Application Fees</th>
                                                     <th className="border border-gray-300 px-4 py-2">Status</th>
+                                                    <th className="border border-gray-300 px-4 py-2">Update Status</th>
                                                     <th className="border border-gray-300 px-4 py-2">Actions</th>
                                                 </tr>
                                             </thead>
@@ -306,16 +324,26 @@ const A_M_Application = () => {
                                                         <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.universityName}</td>
                                                         <td className="border border-gray-300 px-4 py-2">${item?.schol_data?.applicationFees}</td>
                                                         <td className="border border-gray-300 px-4 py-2">
-                                                            {item?.data?.status === "pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
+                                                            {item?.data?.status === "Pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
 
-                                                            {item?.data?.status === "processing" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
+                                                            {item?.data?.status === "Processing" && <span className="px-3 py-1 bg-blue-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
 
-                                                            {item?.data?.status === "completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
+                                                            {item?.data?.status === "Completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
+
+                                                            {item?.data?.status === "Rejected" && <span className="px-3 py-1 bg-red-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Rejected</span>}
 
                                                         </td>
+                                                        {/* status update */}
+                                                        <td className="border border-gray-300 px-4 py-2">
+                                                            <select className="bg-transparent p-2 select-accent" name="status" onChange={(e) => handelUpdateStatuss(e.target.value, item?._id)}>
 
-
-                                                        <td className="border border-gray-300 px-4 py-2 flex justify-center items-center space-x-2">
+                                                                <option disabled selected value="">Update The Status</option>
+                                                                <option value="Processing">Processing</option>
+                                                                <option value="Completed">Completed</option>
+                                                            </select>
+                                                        </td>
+                                                        {/* action buttons */}
+                                                        <td className="border border-gray-300 px-4 py-2 flex justify-center h-full items-center space-x-2">
                                                             <div className="tooltip" data-tip="View Details" >
                                                                 <button
                                                                     onClick={() => handleDetails(item?._id)}
