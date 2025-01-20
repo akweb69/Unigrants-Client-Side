@@ -7,13 +7,21 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Heading from "../Utilities/Heading";
+import { useForm } from "react-hook-form";
 
 
 const MyApplication = () => {
     const axiosSecure = useAxiosSecure();
     const { userApply, isLoading, refetch } = useApplyByUser();
     const navigate = useNavigate();
-
+    const [reviewModal, setReviewModal] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState('')
+    const [sc_id_data, setSc_id_data] = useState({})
+    const [schol_id, setSchol_id] = useState("")
+    const [statusPending, setStatusPending] = useState(false);
+    const [editData, setEditeData] = useState({});
+    const { register, handleSubmit } = useForm();
 
     // ! handleCancelApplication -------
     const handleCancelApplication = (id) => {
@@ -57,11 +65,7 @@ const MyApplication = () => {
         navigate("/all-scholarship")
     }
     // ! reviews modal
-    const [reviewModal, setReviewModal] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState('')
-    const [sc_id_data, setSc_id_data] = useState({})
-    const [schol_id, setSchol_id] = useState("")
+
 
     const handleRatingChange = (e) => {
         setRating(parseInt(e.target.value));
@@ -107,14 +111,6 @@ const MyApplication = () => {
                 console.log("from rating update-->", err)
             })
 
-
-
-
-
-
-
-
-
         axiosSecure.post("/reviews", finalReviewData)
             .then(res => {
                 const data = res.data;
@@ -130,13 +126,53 @@ const MyApplication = () => {
             })
     }
 
+    // ! edit function
+    const [app_id, setApp_id] = useState('')
+    const [submitLoading, setSubmitLoading] = useState(false)
+
+    const handleEditApply = (id, status) => {
+        if (status === "processing") {
+            setApp_id(id)
+            const data = userApply.filter(k => k._id === id)[0]
+            console.log("dattatata-->", data.data)
+            setEditeData(data.data)
+            setStatusPending(true)
+        }
+        else {
+            toast.error("Can not edit the application is processing!")
+        }
+
+    }
+    const handleCancelEditeModal = () => {
+        setStatusPending(false)
+    }
+    const editAplly = (data) => {
+        setSubmitLoading(true)
+        axiosSecure.patch(`/update_application_info/?id=${app_id}`, data)
+            .then(res => {
+                const data = res.data;
+                if (data.modifiedCount > 0) {
+                    refetch()
+                    setSubmitLoading(false)
+                    toast.success("Updated success!")
+                    setEditeData(false)
+                }
+
+            })
+            .catch(err => {
+                toast.error("Something went wrong try again letter")
+                setSubmitLoading(false)
+            })
+        console.log(data)
+
+    }
 
     return (
         <div className="w-full h-full ">
             <Heading one={"My Applications"}></Heading>
             {/* modal  reviews*/}
             {
-                reviewModal && <div className="w-full min-h-screen flex justify-center items-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm fixed top-0">
+                reviewModal && <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm flex justify-center items-center">
                     <div className="w-11/12 mx-auto md:w-1/2 p-4 md:p-10 bg-white rounded-xl relative">
                         <div
                             onClick={() => setReviewModal(false)}
@@ -202,6 +238,107 @@ const MyApplication = () => {
 
                 </div>
             }
+            {/* edit applications */}
+            {
+                statusPending && <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.6)] backdrop-blur-sm flex justify-center items-center">
+                    <div className="w-11/12 mx-auto md:w-1/2 p-4 md:p-10 max-h-[70vh] overflow-y-scroll bg-white rounded-xl relative">
+                        <div
+                            onClick={() => handleCancelEditeModal()}
+                            className="absolute top-0 right-0 p-2 px-5 text-lg font-bold rounded-l-full bg-red-500 hover:bg-red-800 text-white font-logoFont cursor-pointer">X
+                        </div>
+                        <h1 className="text-2xl md:text-4xl py-4 font-bold font-logoFont text-orange-500">Update Application</h1>
+                        {/* form */}
+                        <div className="">
+                            <form className="md:grid md:grid-cols-2 gap-4 space-y-4 md:space-y-0" onSubmit={handleSubmit(editAplly)}>
+                                {/* number */}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">Applicant Phone Number*</span>
+                                    </div>
+                                    <input defaultValue={editData?.phone} {...register("phone")} type="number" placeholder="Phone Number" className="input input-bordered w-full " />
+                                </label>
+                                {/* gendar  */}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">Applicant Gender*</span>
+
+                                    </div>
+                                    <select
+                                        defaultValue={editData?.gender}
+                                        {...register("gender")} className="select select-bordered">
+                                        <option disabled selected>Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="others">Others</option>
+                                    </select>
+
+                                </label>
+                                {/* adress */}
+                                <p className="col-span-2 w-full">Applicant Address*</p>
+                                <div className="col-span-2 md:grid grid-cols-3 gap-4 space-y-4 md:space-y-0">
+                                    <input
+                                        defaultValue={editData?.vill}
+                                        {...register("vill")} type="text" placeholder="Village Name" className="input input-bordered w-full " />
+                                    <input
+                                        defaultValue={editData?.dist}
+                                        {...register("dist")} type="text" placeholder="District Name" className="input input-bordered w-full " />
+                                    <input
+                                        defaultValue={editData?.country}
+                                        {...register("country")} type="text" placeholder="Country Name" className="input input-bordered w-full " />
+                                </div>
+                                {/* result */}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">SSC Result*</span>
+                                    </div>
+                                    <input
+                                        defaultValue={editData?.ssc}
+                                        {...register("ssc")} type="number" placeholder="5.00" className="input input-bordered w-full " />
+                                </label>
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">HSC Result*</span>
+                                    </div>
+                                    <input
+                                        defaultValue={editData?.hsc}
+                                        {...register("hsc")} type="number" placeholder="5.00" className="input input-bordered w-full " />
+                                </label>
+                                {/* degree  */}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">Applicant Applying Degree*</span>
+                                    </div>
+                                    <select
+                                        defaultValue={editData?.degree}
+                                        {...register("degree")} className="select select-bordered">
+                                        <option disabled selected>Select Degree</option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Bachelor">Bachelor</option>
+                                        <option value="Masters">Masters</option>
+                                    </select>
+                                </label>
+                                {/* gap */}
+                                <label className="form-control w-full ">
+                                    <div className="label">
+                                        <span className="label-text">Study Gap Years</span>
+                                    </div>
+                                    <input
+                                        defaultValue={editData?.gap}
+                                        {...register("gap")} type="number" placeholder="If have then put that" className="input input-bordered w-full " />
+                                </label>
+
+                                <button className="text-center col-span-2 bg-orange-500 text-white px-5 py-2 mt-4 rounded-xl cursor-pointer hover:bg-orange-400">
+                                    {
+                                        submitLoading ? "Updating..." : "Update"
+                                    }
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
 
             {
                 isLoading ? <div className="w-full h-full py-14 flex justify-center bg-white items-center ">
@@ -255,7 +392,9 @@ const MyApplication = () => {
                                                     <Link to={`/s-details/${app?.schol_data?._id}`} className="px-3 w-full py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                                                         Details
                                                     </Link>
-                                                    <button className="px-3 w-full py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                                                    <button
+                                                        onClick={() => handleEditApply(app?._id, app?.data?.status)}
+                                                        className="px-3 w-full py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                                                         Edit
                                                     </button>
                                                     <button
