@@ -18,7 +18,7 @@ const A_AddScholarship = () => {
 
     const onSubmit = async (data) => {
         setIsloading(true)
-        const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today }
+        const scholarshipData = { ...data, postedUserEmail: email, scholarshipPostDate: today, ratings: [] }
 
         const deadline = new Date(data.applicationDeadline).toLocaleDateString("en-US");
         // ! upload image on imgbb hosting site
