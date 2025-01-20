@@ -148,7 +148,7 @@ UniGrants/
 ## 🌐 Live Demo
 
 Experience UniGrants live:
-[UniGrants Platform](https://your-unigrants-demo-url.vercel.app)
+[UniGrants Platform](https://unigrants.netlify.app)
 
 ---
 
