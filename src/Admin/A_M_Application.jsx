@@ -83,7 +83,6 @@ const A_M_Application = () => {
         const data = applications.filter(hi => hi._id === id)[0];
         setDetailsData(data)
         console.log("form --details=-->", data)
-
     }
     const [allData, setAllData] = useState([])
     useEffect(() => {
