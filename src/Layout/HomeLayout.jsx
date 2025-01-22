@@ -35,7 +35,7 @@ const HomeLayout = () => {
         <div>
             <Toaster />
             <Navbar />
-            <div className="min-h-screen w-full">
+            <div className="min-h-screen w-full pt-14 ">
                 <Outlet />
             </div>
             <Footer />

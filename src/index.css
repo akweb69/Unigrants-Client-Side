@@ -14,3 +14,37 @@ body {
   background-color: rgb(255, 119, 0);
   color: white;
 }
+
+.playBtn::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgb(103, 154, 137);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.playBtn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(71, 207, 244);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s 1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.5);
+  }
+}

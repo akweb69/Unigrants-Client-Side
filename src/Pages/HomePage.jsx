@@ -10,6 +10,7 @@ import HowItWork from "../Components/HowItWork";
 import HowToApply from "../Components/HowToApply";
 import Newsletter from "../Components/Newsletter";
 import TopScholarship from "../Components/TopScholarship";
+import VideoSection from "../Components/VideoSection";
 
 const HomePage = () => {
     return (
@@ -22,6 +23,7 @@ const HomePage = () => {
             <Benefits></Benefits>
             <HowToApply></HowToApply>
             <CTASection></CTASection>
+            <VideoSection></VideoSection>
             <FAQ></FAQ>
             <Contact></Contact>
             <Colaborate></Colaborate>
