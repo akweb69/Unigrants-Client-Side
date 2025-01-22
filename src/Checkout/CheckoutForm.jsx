@@ -131,7 +131,7 @@ const CheckoutForm = ({ id }) => {
             }
         })
         if (res.data.success) {
-            const finalData = { ...fullData, photo: res.data.data.display_url, status: "processing" }
+            const finalData = { ...fullData, photo: res.data.data.display_url, status: "pending" }
 
             axiosSecure.post("/applied-scholarship", finalData)
                 .then(res => {

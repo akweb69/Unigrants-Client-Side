@@ -82,7 +82,7 @@ const A_Dashboard = () => {
                     </div>
                 </div>
                 {/* right side */}
-                <div className="flex-1">
+                <div className="flex-1 pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>

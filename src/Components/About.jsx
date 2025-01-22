@@ -4,7 +4,7 @@ import Heading from "../Utilities/Heading";
 
 const About = () => {
     return (
-        <div className="w-full  font-logoFont">
+        <div className="w-full  font-logoFont pb-14 ">
             <Heading one={"About Us"} two={" UniGrants is a platform dedicated to helping students achieve their academic dreams."}></Heading>
             {/* Main Container */}
             <div className="w-11/12 mx-auto flex flex-col lg:flex-row items-center gap-8">
