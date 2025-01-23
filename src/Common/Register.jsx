@@ -167,7 +167,7 @@ const Register = () => {
                                     <button
                                         className="w-full py-2 text-lg font-semibold text-center bg-blue-500 rounded-lg text-white hover:bg-blue-600 focus:outline-none transform hover:scale-102 transition duration-300 shadow-md hover:shadow-lg font-primary"
                                     >
-                                        {regloading ? "Please Wait ..." : "Register Now"}
+                                        {regloading ? <div className="flex justify-center items-center gap-4">Creating Wait... <span className="loading-bars loading-lg text-orange-500"></span></div> : "Register Now"}
                                     </button>
                                 </div>
                                 {/* Forgot Password */}

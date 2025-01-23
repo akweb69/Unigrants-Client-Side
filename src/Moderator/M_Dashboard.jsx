@@ -12,7 +12,7 @@ const M_Dashboard = () => {
                 <div className="bg-orange-400 py-3 pt-5" >
                     <div className="flex w-11/12 mx-auto justify-between items-center">
                         <div className="text-2xl font-logoFont font-semibold text-white">
-                            User Dashboard
+                            Moderator Dashboard
                         </div>
                         <div className="text-white text-2xl p-1 border border-orange-500 rounded-md">
                             {!menu ? (
@@ -50,7 +50,7 @@ const M_Dashboard = () => {
                     }
                 </div>
                 {/* outlet */}
-                <div className="">
+                <div className="pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>
@@ -76,7 +76,7 @@ const M_Dashboard = () => {
                     </div>
                 </div>
                 {/* right side */}
-                <div className="flex-1">
+                <div className="flex-1 pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>

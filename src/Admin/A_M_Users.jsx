@@ -9,8 +9,9 @@ import Swal from 'sweetalert2';
 
 const A_M_Users = () => {
     const axiosSecure = useAxiosSecure();
-    const [users, refetch, isLoading] = useAllUser();
+    const [users, refetch, isPending] = useAllUser();
     const [allUsers, setAllUsers] = useState(users)
+
 
     const moderatorRole = (id, e) => {
 
@@ -61,6 +62,10 @@ const A_M_Users = () => {
         }
     }
 
+    React.useEffect(() => {
+        setAllUsers(users);
+    }, [users]);
+
     // delete user ---->
     const handleDeleteUser = (id, user) => {
         Swal.fire({
@@ -76,25 +81,28 @@ const A_M_Users = () => {
                 axiosSecure.delete(`/delete_user_by_id/?id=${id}`)
                     .then(res => {
                         const data = res.data;
+
                         if (data.deletedCount > 0) {
-                            toast.success(`Deleted User --> ${user} Successful!`)
-                            refetch()
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: `The user ${user} has been deleted.`,
-                                icon: "success"
+                            toast.success(`Deleted User --> ${user} Successfully!`);
+                            refetch().then((updatedData) => {
+                                setAllUsers(updatedData);
+                                Swal.fire({
+                                    title: "Deleted!",
+                                    text: `The user ${user} has been deleted.`,
+                                    icon: "success"
+                                });
                             });
                         }
                     })
                     .catch(err => {
-                        toast.success(`Something went wrong try again letter!`)
-                    })
+                        toast.error(`Something went wrong. Try again later!`);
+                    });
             }
         });
+    };
 
 
 
-    }
     const handleSort = (value) => {
 
         if (value === "Moderator") {
@@ -120,6 +128,7 @@ const A_M_Users = () => {
         setAllUsers(users)
         toast.success(` Sort By ${value} Role`)
     }
+    console.log("form---->", allUsers)
 
     return (
         <div className='w-full min-h-screen'>
@@ -137,7 +146,7 @@ const A_M_Users = () => {
             </div>
             <div className="w-11/12 mx-auto">
                 {
-                    isLoading ? <div className="w-full min-h-[50vh] flex justify-center items-center">
+                    isPending ? <div className="w-full min-h-[50vh] flex justify-center items-center">
                         <div className="loading loading-bars text-warning text-5xl"></div>
                     </div> :
                         <div className="font-logoFont">
@@ -162,18 +171,19 @@ const A_M_Users = () => {
                                                         <td className="border text-center py-2">{item?.email}</td>
                                                         <td
                                                             className="border  h-full text-center py-2">
-                                                            <div className="w-full flex justify-center items-center px-5">
-                                                                <select
-                                                                    defaultValue={item?.role}
-                                                                    onChange={(e) => moderatorRole(item?._id, e)}
-                                                                    className='select select-warning bg-transparent  w-32' >
-
-                                                                    <option value="user">User</option>
-                                                                    <option
-                                                                        value="Moderator">Moderator</option>
-                                                                    <option value="Admin">Admin</option>
-                                                                </select>
-                                                            </div>
+                                                            {
+                                                                item?.role && (<div className="w-full flex justify-center items-center px-5">
+                                                                    <select
+                                                                        value={item?.role || "user"}
+                                                                        onChange={(e) => moderatorRole(item?._id, e)}
+                                                                        className='select select-warning bg-transparent  w-32' >
+                                                                        <option
+                                                                            value="Moderator">Moderator</option>
+                                                                        <option value="user">User</option>
+                                                                        <option value="Admin">Admin</option>
+                                                                    </select>
+                                                                </div>)
+                                                            }
 
                                                         </td>
 

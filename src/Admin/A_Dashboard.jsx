@@ -12,7 +12,7 @@ const A_Dashboard = () => {
                 <div className="bg-purple-400 py-3 pt-5" >
                     <div className="flex w-11/12 mx-auto justify-between items-center">
                         <div className="text-2xl font-logoFont font-semibold text-white">
-                            User Dashboard
+                            Admin Dashboard
                         </div>
                         <div className="text-white text-2xl p-1 border border-orange-500 rounded-md">
                             {!menu ? (
@@ -52,7 +52,7 @@ const A_Dashboard = () => {
                     }
                 </div>
                 {/* outlet */}
-                <div className="">
+                <div className="pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>

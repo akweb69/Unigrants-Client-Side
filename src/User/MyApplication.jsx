@@ -131,7 +131,7 @@ const MyApplication = () => {
     const [submitLoading, setSubmitLoading] = useState(false)
 
     const handleEditApply = (id, status) => {
-        if (status === "processing") {
+        if (status === "pending") {
             setApp_id(id)
             const data = userApply.filter(k => k._id === id)[0]
             console.log("dattatata-->", data.data)

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,22 +7,27 @@ import toast from "react-hot-toast";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 const Login = () => {
-
+    const [loadingLogin, setLoadingLogin] = useState(false)
     const { register, handleSubmit } = useForm()
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { user, setUser, loading, setLoading, loginEmailandPassword, googleLogin } = useContext(AuthContext);
+
     const onSubmit = (data) => {
         console.log(data)
+        setLoadingLogin(true)
         loginEmailandPassword(data.email, data.password)
             .then(res => {
+                setLoadingLogin(false)
                 console.log(res.user)
                 toast.success("Login success!")
                 navigate("/")
+
             })
             .catch(err => {
                 console.log(err)
                 toast.error("Invalid user or password")
+                setLoadingLogin(false)
             })
 
     }
@@ -84,7 +89,9 @@ const Login = () => {
                                 {/* btn */}
                                 <div className="my-5">
                                     <button className="w-full py-2 text-lg font-semibold text-center bg-blue-500 rounded-lg text-white hover:bg-blue-600 focus:outline-none transform hover:scale-102 transition duration-300 shadow-md hover:shadow-lg font-primary" >
-                                        Login
+                                        {
+                                            loadingLogin ? "Please wait..." : "Login"
+                                        }
                                     </button>
 
                                 </div>

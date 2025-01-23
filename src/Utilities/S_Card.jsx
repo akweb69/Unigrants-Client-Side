@@ -8,6 +8,7 @@ const S_Card = ({ data }) => {
     const { _id, universityLogo, universityName, universityCountry, scholarshipName, universityCity, scholarshipCategory, subjectCategory, applicationDeadline, applicationFees, ratings } = data
 
     const [rate, setRate] = useState(0)
+
     useEffect(() => {
 
         const total = ratings.reduce((sum, rating) => sum + rating, 0);

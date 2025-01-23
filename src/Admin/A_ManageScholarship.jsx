@@ -1,5 +1,4 @@
 import { FaDeleteLeft } from "react-icons/fa6";
-import useAll_Schol from "../Hooks/useAll_Schol";
 import Heading from "../Utilities/Heading";
 import { MdOutlineDescription } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
@@ -10,9 +9,10 @@ import { AuthContext } from "../AuthContext/AuthProvider";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useScholarship from "../Hooks/useScholarship";
 
 const A_ManageScholarship = () => {
-    const [scholarship, refetch] = useAll_Schol();
+    const [scholarship, refetch] = useScholarship();
     const [editModal, setEditModal] = useState(false);
     const [defaultValue, setDefaultValue] = useState({})
 

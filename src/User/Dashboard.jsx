@@ -42,7 +42,7 @@ const Dashboard = () => {
                     }
                 </div>
                 {/* outlet */}
-                <div className="">
+                <div className="pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>
@@ -64,7 +64,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 {/* right side */}
-                <div className="flex-1">
+                <div className="flex-1 pb-14">
                     <Outlet></Outlet>
                 </div>
             </div>
