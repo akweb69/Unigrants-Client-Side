@@ -118,7 +118,7 @@ const CheckoutForm = ({ id }) => {
         const userName = user?.displayName;
         const scholarship_id = id;
         const date = new Date();
-        const today = date.toDateString()
+        const today = date.toLocaleDateString("en-US")
         const imgFile = { image: data.photo[0] }
 
 
