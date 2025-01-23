@@ -6,7 +6,7 @@ const useScholarship = () => {
     const axiosPublic = useAxiosPublic()
 
 
-    const { data: scholarship = [] } = useQuery({
+    const { data: scholarship = [], refetch } = useQuery({
         queryKey: ["scholarship"],
         queryFn: async () => {
             const res = await axiosPublic.get(`/top_Scholarship`)
@@ -15,7 +15,7 @@ const useScholarship = () => {
         }
     })
     console.log(scholarship)
-    return [scholarship]
+    return [scholarship, refetch]
 
 };
 

@@ -12,7 +12,7 @@ import Nodatapage from "../Utilities/Nodatapage";
 import { BsPersonBadge } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 
-const A_M_Application = () => {
+const All_Apply = () => {
 
     const [applications, refetch, isLoading] = useAllApply();
     const [feedbackModal, setFeedbackModal] = useState(false)
@@ -385,4 +385,4 @@ const A_M_Application = () => {
     );
 };
 
-export default A_M_Application;
+export default All_Apply;
