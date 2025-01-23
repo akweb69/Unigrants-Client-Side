@@ -6,6 +6,17 @@ export const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
+    axiosSecure.interceptors.request.use((config) => {
+
+        const token = localStorage.getItem("Access_Token")
+        config.headers.Authorization = token
+        return config
+    },
+        (error) => {
+            console.log("err from- interceptor--->", error)
+        })
+
+
     return axiosSecure
 }
 
