@@ -417,7 +417,6 @@ const MyApplication = () => {
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         }
                         {

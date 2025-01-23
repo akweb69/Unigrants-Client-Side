@@ -7,10 +7,10 @@ const Dashboard = () => {
     const [menu, setMenu] = useState(false)
     return (
         <div className="w-full min-h-screen bg-orange-50">
-            <div className="md:hidden">
+            <div className="lg:hidden">
                 {/* navbar */}
-                <div className="bg-orange-400 py-1" >
-                    <div className="flex w-11/12 mx-auto justify-between items-center">
+                <div className="bg-teal-400 " >
+                    <div className="flex w-11/12 py-3 pt-5 flex-row-reverse mx-auto justify-between items-center">
                         <div className="text-2xl font-logoFont font-semibold text-white">
                             User Dashboard
                         </div>
@@ -46,7 +46,7 @@ const Dashboard = () => {
                     <Outlet></Outlet>
                 </div>
             </div>
-            <div className="w-full hidden md:flex h-full">
+            <div className="w-full hidden lg:flex h-full">
                 {/* left side */}
                 <div className="w-[200px] bg-orange-100 min-h-screen py-4">
                     <h1 className="text-2xl md:text-3xl font-logoFont font-extrabold text-transparent 
