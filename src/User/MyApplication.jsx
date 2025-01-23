@@ -383,9 +383,9 @@ const MyApplication = () => {
                                                 <td className="border border-gray-300 px-4 py-2">
                                                     {app.data?.status === "pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
 
-                                                    {app.data?.status === "processing" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
+                                                    {app.data?.status === "Processing" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
 
-                                                    {app.data?.status === "completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
+                                                    {app.data?.status === "Completed" && <span className="px-3 py-1 bg-green-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <FaCheckCircle></FaCheckCircle> Completed</span>}
 
                                                 </td>
                                                 <td className="border border-gray-300 gap-2 flex flex-col justify-center items-center px-4 py-2 text-center">

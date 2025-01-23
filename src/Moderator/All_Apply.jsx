@@ -92,30 +92,31 @@ const A_M_Application = () => {
     }, [applications])
 
     const handleSorting = (e) => {
-        toast.success(`Sorted by ${e}`)
-        if (e === "applied_date") {
-            const newData = applications.sort((a, b) => {
-                const dateA = (a.data.apply_date);
-                const dateB = (b.data.apply_date);
-                return dateA - dateB;
-            });
-            setAllData(newData)
-        }
-        if (e === "deadline") {
-            const newData = applications.sort((a, b) => {
-                const dateA = (a.schol_data.applicationDeadline);
-                const dateB = (b.schol_data.applicationDeadline);
-                return dateA - dateB;
-            });
 
-            setAllData(newData)
+        let sortedData = [...applications];
+
+        if (e === "applied_date") {
+            sortedData.sort((a, b) => {
+                const dateA = new Date(a.data.apply_date);
+                const dateB = new Date(b.data.apply_date);
+                return dateB - dateA;
+            });
+            toast.success(`Sorted by ${e}`);
+        }
+        else if (e === "deadline") {
+            sortedData.sort((a, b) => {
+                const dateA = new Date(a.schol_data.applicationDeadline);
+                const dateB = new Date(b.schol_data.applicationDeadline);
+                return dateB - dateA;
+            });
+            toast.success(`Sorted by ${e}`);
         }
         else {
-
-            setAllData(applications)
+            sortedData = [...applications];
         }
 
-    }
+        setAllData(sortedData);
+    };
     // updating status---->
     const handelUpdateStatuss = (value, id) => {
 
