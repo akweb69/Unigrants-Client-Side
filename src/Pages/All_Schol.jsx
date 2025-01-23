@@ -42,7 +42,7 @@ const All_Schol = () => {
     };
 
     return (
-        <div className="w-full min-h-screen bg-orange-50 flex justify-center items-center">
+        <div className="w-full min-h-screen bg-gradient-to-b from-teal-100 via-blue-50  to-orange-50 flex justify-center items-center">
             <div className="w-11/12 mx-auto py-10">
                 <h1 className="text-3xl md:text-5xl mb-4 font-logoFont font-extrabold text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto">All Scholarship</h1>
 

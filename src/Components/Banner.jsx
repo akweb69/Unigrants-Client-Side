@@ -1,7 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 const Banner = () => {
     const settings = {
@@ -13,6 +13,10 @@ const Banner = () => {
         autoplaySpeed: 5000,
         fade: true,
     };
+    const navigate = useNavigate()
+    const handleNaviagte = () => {
+        navigate("/all-scholarship")
+    }
     return (
         <div className="w-full">
             <div className="w-full h-[80vh] ">
@@ -30,7 +34,9 @@ const Banner = () => {
                                             <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
                                             <div className="flex-1"><input type="text" className="w-full outline-none bg-transparent border-0 text-white" placeholder="Search Scholaship by university , country ..." /></div>
                                             {/* btn */}
-                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                            <div
+                                                onClick={() => handleNaviagte()}
+                                                className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full cursor-pointer">
                                                 Search
                                             </div>
                                         </div>
@@ -50,7 +56,9 @@ const Banner = () => {
                                             <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
                                             <div className="flex-1"><input type="text" className="w-full outline-none bg-transparent border-0 text-white" placeholder="Search Scholaship by university , country ..." /></div>
                                             {/* btn */}
-                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                            <div
+                                                onClick={() => handleNaviagte()}
+                                                className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full cursor-pointer">
                                                 Search
                                             </div>
                                         </div>
@@ -70,7 +78,9 @@ const Banner = () => {
                                             <div className="px-2"><FaSearch className="text-orange-500 "></FaSearch> </div>
                                             <div className="flex-1"><input type="text" className="w-full outline-none text-white bg-transparent border-0" placeholder="Search Scholaship by university , country ..." /></div>
                                             {/* btn */}
-                                            <div className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full">
+                                            <div
+                                                onClick={() => handleNaviagte()}
+                                                className="h-full flex justify-center items-center bg-orange-500 p-2 px-4 text-white rounded-full cursor-pointer">
                                                 Search
                                             </div>
                                         </div>

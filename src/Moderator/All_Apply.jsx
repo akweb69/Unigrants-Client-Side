@@ -117,6 +117,7 @@ const A_M_Application = () => {
 
         setAllData(sortedData);
     };
+
     // updating status---->
     const handelUpdateStatuss = (value, id) => {
 
@@ -126,7 +127,7 @@ const A_M_Application = () => {
                 const data = res.data
                 console.log(data)
                 refetch()
-                toast.success(`Updated statsu success to ${value}`)
+                toast.success(`Updated status  to ${value}`)
             })
             .catch(err => {
                 console.log(err)
@@ -325,7 +326,7 @@ const A_M_Application = () => {
                                                         <td className="border border-gray-300 px-4 py-2">{item?.schol_data?.universityName}</td>
                                                         <td className="border border-gray-300 px-4 py-2">${item?.schol_data?.applicationFees}</td>
                                                         <td className="border border-gray-300 px-4 py-2">
-                                                            {item?.data?.status === "Pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
+                                                            {item?.data?.status === "pending" && <span className="px-3 py-1 bg-yellow-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Pending</span>}
 
                                                             {item?.data?.status === "Processing" && <span className="px-3 py-1 bg-blue-500 text-white rounded-lg text-xs flex items-center gap-[2px]"> <MdPending></MdPending> Processing  </span>}
 

@@ -12,9 +12,9 @@ const S_Card = ({ data }) => {
     useEffect(() => {
 
         const total = ratings.reduce((sum, rating) => sum + rating, 0);
-        const average = total / ratings.length;
+        const average = parseFloat(total / ratings.length).toFixed(1);
         if (ratings.length === 0) {
-            setRate(0)
+            setRate(0.0)
         }
         else {
             setRate(average)
@@ -42,7 +42,7 @@ const S_Card = ({ data }) => {
                         <p className=" font-bold font-logoFont text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text">Deadline : {applicationDeadline}</p>
                         <p className="md:text-xl font-bold font-logoFont text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text">Fees : ${applicationFees}</p>
                     </div>
-                    <p className="font-logoFont md:text-xl font-bold text-orange-500">Rating: {rate} / 5.00</p>
+                    <p className="font-logoFont md:text-xl font-bold text-orange-500">Rating: {rate} / 5.0</p>
                 </div>
             </div>
             {/* button */}
