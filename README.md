@@ -1,188 +1,194 @@
-# UniGrants
 
-Welcome to **UniGrants**! This platform is designed to help students find and apply for scholarships seamlessly. With an intuitive user interface and powerful tools, UniGrants bridges the gap between students and their dreams.
+```markdown
+# 🎓 UniGrants – Scholarship Finder & Application Platform 💰
+
+Welcome to **UniGrants**! This platform is designed to help students **find and apply for scholarships seamlessly**. With an intuitive user interface and powerful tools, **UniGrants** bridges the gap between students and their dreams.  
+
+🌐 **Live Demo**: [UniGrants](https://unigrants.netlify.app)  
+
+---
+
+## 📖 Table of Contents
+- [Features](#features)
+- [How to Run Locally](#how-to-run-locally)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Documentation](#documentation)
+- [Troubleshooting](#troubleshooting)
+- [Security Best Practices](#security-best-practices)
+- [Contributors](#contributors)
+- [License](#license)
 
 ---
 
 ## 🚀 Features
 
-- **Scholarship Search**: Find scholarships based on location, eligibility, and application fees.
-- **Application Management**: Track your applications easily.
-- **User Roles**:
-  - **Default Users**: Search and apply for scholarships.
-  - **Admins**: Manage scholarship data and platform configurations.
-  - **Moderators**: Moderate user-generated content and reviews.
-- **Interactive Dashboard**: Statistical insights to monitor platform activities.
-- **Responsive Design**: Optimized for all devices.
-- **Secure Authentication**: Powered by Firebase for login and registration.
+✅ **Scholarship Search** – Find scholarships based on location, eligibility, and application fees.  
+✅ **Application Management** – Track your applications easily.  
+✅ **User Roles**:  
+   - **Students** – Search and apply for scholarships.  
+   - **Admins** – Manage scholarship data and platform configurations.  
+   - **Moderators** – Moderate user-generated content and reviews.  
+✅ **Interactive Dashboard** – View statistical insights and monitor platform activities.  
+✅ **Responsive Design** – Fully optimized for all devices.  
+✅ **Secure Authentication** – Powered by Firebase for login and registration.  
 
 ---
 
-## 📊 Statistics Dashboard
+## 🏠 How to Run Locally
 
-Gain insights into platform performance:
+### Prerequisites
+Ensure you have the following installed:
+- **Node.js** (Latest LTS version recommended)
+- **npm** or **yarn**
+- **Git**
 
-- Total Scholarships Listed
-- Total Applications Submitted
-- Total Registered Users
-- User Reviews Count
+### Steps to Run Locally
 
----
-
-## 🛠️ Technologies Used
-
-### Frontend
-
-- React.js
-- Tailwind CSS
-- Material UI
-- Framer Motion
-
-### Backend
-
-- Node.js
-- Express.js
-
-### Database
-
-- MongoDB
-
-### Authentication
-
-- Firebase Authentication
-
-### Hosting
-
-- Vercel
-
----
-
-## 🖥️ Installation
-
-1. Clone the repository:
-
+1️⃣ **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/UniGrants.git
+   git clone https://github.com/your-repo/unigrants.git
+   cd unigrants
    ```
 
-2. Navigate to the project directory:
-
-   ```bash
-   cd UniGrants
-   ```
-
-3. Install dependencies:
-
+2️⃣ **Install dependencies**
    ```bash
    npm install
    ```
 
-4. Set up environment variables:
-   Create a `.env` file in the root directory and add the following:
+3️⃣ **Create and configure `.env` file**  
+   Inside the project directory, create a `.env` file and add the following:
 
    ```env
-   REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
-   REACT_APP_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-   REACT_APP_FIREBASE_PROJECT_ID=your_project_id
-   MONGO_URI=your_mongodb_connection_string
+   VITE_apiKey=YOUR_FIREBASE_API_KEY
+   VITE_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
+   VITE_projectId=YOUR_FIREBASE_PROJECT_ID
+   VITE_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
+   VITE_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
+   VITE_appId=YOUR_FIREBASE_APP_ID
+
+   VITE_IMGBB_API_KEY=YOUR_IMGBB_API_KEY
+   VITE_PAYMENT_API_KEY=YOUR_STRIPE_API_KEY
    ```
 
-5. Run the application:
-
+4️⃣ **Run the development server**
    ```bash
-   npm start
+   npm run dev
    ```
-
-6. Deploy the backend to Vercel:
-   ```bash
-   vercel
-   ```
+   The project will be available at **`http://localhost:5173`**.
 
 ---
 
-## 📦 Folder Structure
+## 🎮 Usage
 
+- **Searching for Scholarships** – Use filters to find scholarships based on criteria.  
+- **Applying for Scholarships** – Submit applications through the platform.  
+- **Tracking Applications** – View application status on the dashboard.  
+- **Admin & Moderator Panel** – Manage scholarships, moderate reviews, and analyze platform data.  
+
+---
+
+## ⚙️ Configuration
+
+- Modify `.env` to configure API keys and Firebase settings.  
+- Customize UI using TailwindCSS in `tailwind.config.js`.  
+
+---
+
+## 📦 Dependencies
+
+### Main Dependencies
+```json
+{
+  "react": "^18.3.1",
+  "react-dom": "^18.3.1",
+  "react-router-dom": "^7.1.1",
+  "firebase": "^11.1.0",
+  "axios": "^1.7.9",
+  "chart.js": "^4.4.7",
+  "react-chartjs-2": "^5.3.0",
+  "sweetalert2": "^11.15.10",
+  "react-hook-form": "^7.54.2",
+  "framer-motion": "^11.18.1",
+  "react-fast-marquee": "^1.6.5"
+}
 ```
-UniGrants/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   ├── Statistics.js
-│   ├── hooks/
-│   │   ├── useAll_Schol.js
-│   │   ├── useAllApply.js
-│   ├── pages/
-│   │   ├── Home.js
-│   │   ├── About.js
-│   │   ├── Contact.js
-│   ├── styles/
-│   │   ├── global.css
-├── .env
-├── package.json
+
+### Dev Dependencies
+```json
+{
+  "vite": "^6.0.5",
+  "eslint": "^9.17.0",
+  "tailwindcss": "^3.4.17",
+  "daisyui": "^4.12.23",
+  "postcss": "^8.5.0"
+}
 ```
 
 ---
 
-## 📋 API Endpoints
+## 📚 Documentation
 
-### Scholarships
-
-- **GET** `/api/scholarships`: Fetch all scholarships.
-- **POST** `/api/scholarships`: Add a new scholarship.
-- **PATCH** `/api/scholarships/:id`: Update a scholarship.
-
-### Applications
-
-- **GET** `/api/applications`: Fetch all applications.
-- **POST** `/api/applications`: Submit a new application.
-
-### Users
-
-- **GET** `/api/users`: Fetch all users.
-- **PATCH** `/api/users/:id`: Update user roles or information.
+- **React**: [React Docs](https://reactjs.org/docs/getting-started.html)  
+- **Firebase**: [Firebase Docs](https://firebase.google.com/docs)  
+- **TailwindCSS**: [Tailwind Docs](https://tailwindcss.com/docs/)  
+- **Vite**: [Vite Docs](https://vitejs.dev/guide/)  
 
 ---
 
-## 🌐 Live Demo
+## 🛠 Troubleshooting
 
-Experience UniGrants live:
-[UniGrants Platform](https://unigrants.netlify.app)
+🔹 **Firebase Authentication Issues**  
+Ensure API keys in `.env` are correct and Firebase Authentication is properly configured.  
 
----
+🔹 **Dependency Errors**  
+If issues arise, delete `node_modules` and reinstall:  
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
 
-## 🤝 Contribution
-
-We welcome contributions! Follow these steps:
-
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add your message here"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-5. Open a pull request.
+🔹 **Build Errors**  
+Run the following:  
+```bash
+npm run lint
+npm run build
+```
 
 ---
 
-## 🛡️ License
+## 🔒 Security Best Practices
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+- **Never expose `.env` files** – Keep API keys and sensitive data private.  
+- **Use HTTPS for API calls** – Ensure secure communication.  
+- **Enable Firebase Authentication Rules** – Restrict database access properly.  
+- **Regularly update dependencies** – Keep packages up-to-date to avoid vulnerabilities.  
 
 ---
 
-## 📞 Contact
+## 👨‍💻 Contributors
 
-For any inquiries or feedback, feel free to reach out:
+**Abu Kalam**  
+📧 Email: [akwebdev69@gmail.com](mailto:akwebdev69@gmail.com)  
+📱 WhatsApp: [01768037870](https://wa.me/8801768037870)  
+📍 Location: Joypurhat, Dhaka, Bangladesh  
 
-- **Email**: akwebdev69@gmail.com
-- **Phone**: +880 1768037870
-- **Location**: Dhaka, Bangladesh
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**.  
+
+---
+
+🚀 **UniGrants – Empowering students to achieve their dreams!**  
+```  
+
+### 🔹 **Changes & Additions:**
+✅ **"How to Run Locally"** section with prerequisites and step-by-step setup  
+✅ **"Security Best Practices"** to ensure better project security  
+✅ **Better structure & formatting** for improved readability  
+
+This version makes your **README** more professional, detailed, and user-friendly. Let me know if you need further edits! 🚀
