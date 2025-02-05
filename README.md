@@ -1,33 +1,33 @@
 
----
 
 ```markdown
-<h1 align="center">🎓 UniGrants – Scholarship Finder & Application Platform 💰</h1>
+<h1 align="center">🎓 UniGrants – Find & Apply for Scholarships Easily! 💰</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-UniGrants-blue.svg" alt="Platform Badge">
-  <img src="https://img.shields.io/badge/Built%20With-React-blue.svg" alt="React Badge">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License Badge">
-</p>
-
-<p align="center">
-  Welcome to <b>UniGrants</b> – the ultimate scholarship search and application platform!  
-  Find scholarships, track applications, and achieve your academic dreams with ease. 🚀  
-</p>
-
-<p align="center">
-  🌐 <a href="https://unigrants.netlify.app"><b>Live Demo</b></a> | 📜 <a href="#features"><b>Features</b></a> | ⚡ <a href="#installation"><b>Installation</b></a> | 🔧 <a href="#usage"><b>Usage</b></a>
-</p>
+  <img src="https://i.ibb.co/hxj73787/Screenshot-2025-01-30-070904.png" alt="Platform Badge">
 
 ---
 
-## 📖 Table of Contents
+## 🌟 Project Theme  
+
+Welcome to **UniGrants**! 🚀  
+UniGrants is an advanced **scholarship discovery and application management platform** that enables students to find and apply for scholarships **seamlessly**.  
+
+With an **intuitive user interface** and **powerful tools**, UniGrants **bridges the gap** between students and their dreams.  
+
+🌍 **Live Demo**: [UniGrants](https://unigrants.netlify.app)  
+
+---
+
+## 📖 Table of Contents  
+
+- [🌟 Project Theme](#-project-theme)
 - [🚀 Features](#-features)
+- [📦 Used npm Packages](#-used-npm-packages)
+- [🔐 Environment Variables (`.env.local`)](#-environment-variables-envlocal)
+- [📂 Dependencies](#-dependencies)
 - [🏠 How to Run Locally](#-how-to-run-locally)
-- [🛠 Installation](#-installation)
 - [🎮 Usage](#-usage)
 - [⚙️ Configuration](#-configuration)
-- [📦 Dependencies](#-dependencies)
 - [📚 Documentation](#-documentation)
 - [🛠 Troubleshooting](#-troubleshooting)
 - [🔒 Security Best Practices](#-security-best-practices)
@@ -39,78 +39,67 @@
 ## 🚀 Features  
 
 ✅ **🎯 Scholarship Search** – Find scholarships based on eligibility, location, and fees.  
-✅ **📂 Application Management** – Track your applications in one place.  
+✅ **📂 Application Management** – Track and manage your applications.  
 ✅ **👥 User Roles**:
    - 🎓 **Students** – Search & apply for scholarships.  
    - 🛠 **Admins** – Manage scholarships & platform settings.  
    - 🔍 **Moderators** – Moderate user-generated content & reviews.  
-✅ **📊 Interactive Dashboard** – Get statistical insights & monitor activities.  
-✅ **📱 Responsive Design** – Works on all devices.  
+✅ **📊 Interactive Dashboard** – Get real-time statistics & analytics.  
+✅ **📱 Responsive Design** – Works flawlessly on all devices.  
 ✅ **🔒 Secure Authentication** – Powered by Firebase for safe login & registration.  
 
 ---
 
-## 🏠 How to Run Locally  
+## 📦 Used npm Packages  
 
-### 🔧 Prerequisites  
-Ensure you have the following installed:  
-✔ **Node.js** (Latest LTS)  
-✔ **npm** or **yarn**  
-✔ **Git**  
+UniGrants is built with **React** and several powerful npm packages:  
 
-### 🚀 Steps to Run Locally  
-1️⃣ **Clone the Repository**  
-   ```bash
-   git clone https://github.com/your-repo/unigrants.git
-   cd unigrants
-   ```
+- **Framework & UI**:  
+  - [`react`](https://reactjs.org/) – Frontend library  
+  - [`react-router-dom`](https://reactrouter.com/) – Routing  
+  - [`framer-motion`](https://www.framer.com/motion/) – Animations  
+  - [`tailwindcss`](https://tailwindcss.com/) – Styling  
+  - [`daisyui`](https://daisyui.com/) – UI Components  
 
-2️⃣ **Install Dependencies**  
-   ```bash
-   npm install
-   ```
+- **State Management & API Handling**:  
+  - [`@tanstack/react-query`](https://tanstack.com/query) – API calls & caching  
+  - [`axios`](https://axios-http.com/) – HTTP requests  
 
-3️⃣ **Configure Environment Variables**  
-   Create a `.env` file in the root directory and add:  
-   ```env
-   VITE_apiKey=YOUR_FIREBASE_API_KEY
-   VITE_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
-   VITE_projectId=YOUR_FIREBASE_PROJECT_ID
-   VITE_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
-   VITE_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
-   VITE_appId=YOUR_FIREBASE_APP_ID
+- **Authentication & Storage**:  
+  - [`firebase`](https://firebase.google.com/) – Authentication & database  
+  - [`localforage`](https://localforage.github.io/localForage/) – Local storage  
 
-   VITE_IMGBB_API_KEY=YOUR_IMGBB_API_KEY
-   VITE_PAYMENT_API_KEY=YOUR_STRIPE_API_KEY
-   ```
-
-4️⃣ **Run the Development Server**  
-   ```bash
-   npm run dev
-   ```
-   🚀 The project will be available at **`http://localhost:5173`**.
+- **Miscellaneous**:  
+  - [`chart.js`](https://www.chartjs.org/) – Data visualization  
+  - [`react-hook-form`](https://react-hook-form.com/) – Form handling  
+  - [`sweetalert2`](https://sweetalert2.github.io/) – Alerts & popups  
 
 ---
 
-## 🎮 Usage  
+## 🔐 Environment Variables (`.env.local`)  
 
-- **🔍 Searching for Scholarships** – Use filters to find scholarships.  
-- **📤 Applying for Scholarships** – Submit applications seamlessly.  
-- **📊 Tracking Applications** – Monitor application status in the dashboard.  
-- **🛠 Admin & Moderator Panel** – Manage data, moderate content, and view analytics.  
+Create a `.env.local` file in the root directory and add:  
+
+```env
+VITE_apiKey=YOUR_FIREBASE_API_KEY
+VITE_authDomain=YOUR_FIREBASE_AUTH_DOMAIN
+VITE_projectId=YOUR_FIREBASE_PROJECT_ID
+VITE_storageBucket=YOUR_FIREBASE_STORAGE_BUCKET
+VITE_messagingSenderId=YOUR_FIREBASE_MESSAGING_SENDER_ID
+VITE_appId=YOUR_FIREBASE_APP_ID
+
+VITE_IMGBB_API_KEY=YOUR_IMGBB_API_KEY
+VITE_PAYMENT_API_KEY=YOUR_STRIPE_API_KEY
+```
+
+🔴 **⚠ Never expose API keys in public repositories!**
 
 ---
 
-## ⚙️ Configuration  
-
-- Modify `.env` to configure API keys & Firebase settings.  
-- Customize the UI using TailwindCSS in `tailwind.config.js`.  
-
----
-
-## 📦 Dependencies  
+## 📂 Dependencies  
 
 ### 📌 Main Dependencies  
+
 ```json
 {
   "react": "^18.3.1",
@@ -122,12 +111,12 @@ Ensure you have the following installed:
   "react-chartjs-2": "^5.3.0",
   "sweetalert2": "^11.15.10",
   "react-hook-form": "^7.54.2",
-  "framer-motion": "^11.18.1",
-  "react-fast-marquee": "^1.6.5"
+  "framer-motion": "^11.18.1"
 }
 ```
 
 ### 🛠 Dev Dependencies  
+
 ```json
 {
   "vite": "^6.0.5",
@@ -140,29 +129,60 @@ Ensure you have the following installed:
 
 ---
 
+## 🏠 How to Run Locally  
+
+1️⃣ **Clone the Repository**  
+   ```bash
+   git clone https://github.com/your-repo/unigrants.git
+   cd unigrants
+   ```
+
+2️⃣ **Install Dependencies**  
+   ```bash
+   npm install
+   ```
+
+3️⃣ **Configure Environment Variables**  
+   Follow the **[`.env.local` setup](#-environment-variables-envlocal)** section.
+
+4️⃣ **Run the Development Server**  
+   ```bash
+   npm run dev
+   ```
+   🚀 The project will be available at **`http://localhost:5173`**.
+
+---
+
+## 🎮 Usage  
+
+- **🔍 Searching for Scholarships** – Filter scholarships based on eligibility & location.  
+- **📤 Applying for Scholarships** – Submit applications with one click.  
+- **📊 Dashboard** – View real-time statistics and application progress.  
+- **🛠 Admin Panel** – Manage scholarships, moderate reviews, and analyze platform usage.  
+
+---
+
 ## 📚 Documentation  
 
-- 📘 **[React Docs](https://reactjs.org/docs/getting-started.html)**  
-- 🔥 **[Firebase Docs](https://firebase.google.com/docs)**  
-- 🎨 **[TailwindCSS Docs](https://tailwindcss.com/docs/)**  
-- ⚡ **[Vite Docs](https://vitejs.dev/guide/)**  
+📘 **[React Docs](https://reactjs.org/docs/getting-started.html)**  
+🔥 **[Firebase Docs](https://firebase.google.com/docs)**  
+🎨 **[TailwindCSS Docs](https://tailwindcss.com/docs/)**  
+⚡ **[Vite Docs](https://vitejs.dev/guide/)**  
 
 ---
 
 ## 🛠 Troubleshooting  
 
 💡 **Firebase Authentication Issues**  
-Ensure API keys in `.env` are correct and Firebase Authentication is properly configured.  
+Ensure API keys in `.env.local` are correct and Firebase Authentication is properly configured.  
 
 💡 **Dependency Errors**  
-If you face issues while installing dependencies, try:  
 ```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
 💡 **Build Errors**  
-Run the following:  
 ```bash
 npm run lint
 npm run build
@@ -172,16 +192,16 @@ npm run build
 
 ## 🔒 Security Best Practices  
 
-⚠ **Never expose `.env` files** – Keep API keys and sensitive data private.  
-⚠ **Use HTTPS for API calls** – Ensure secure communication.  
-⚠ **Enable Firebase Authentication Rules** – Restrict database access properly.  
-⚠ **Regularly update dependencies** – Keep packages up-to-date to avoid vulnerabilities.  
+✔ **Never expose `.env.local` files**.  
+✔ **Use HTTPS for API calls**.  
+✔ **Enable Firebase Authentication Rules**.  
+✔ **Keep dependencies up-to-date**.  
 
 ---
 
 ## 👨‍💻 Contributors  
 
-**🚀 Abu Kalam**  
+📌 **Abu Kalam**  
 📧 Email: [akwebdev69@gmail.com](mailto:akwebdev69@gmail.com)  
 📱 WhatsApp: [01768037870](https://wa.me/8801768037870)  
 📍 Location: Joypurhat, Dhaka, Bangladesh  
@@ -190,7 +210,7 @@ npm run build
 
 ## 📜 License  
 
-This project is licensed under the **MIT License**.  
+📜 This project is licensed under the **MIT License**.  
 
 ---
 
@@ -199,12 +219,9 @@ This project is licensed under the **MIT License**.
 
 ---
 
-### 🔥 **What’s Improved?**
-✅ **Eye-catching design** with center-aligned headings, badges, and emojis  
-✅ **Interactive links** for live demo, documentation, and contributor contact  
-✅ **Beautifully formatted sections** with clear steps and commands  
-✅ **Enhanced readability** with bullet points, icons, and spacing  
+**🔥 Key Improvements:**  
+✅ **Stylish & Interactive** design with emojis, badges, and collapsible sections  
+✅ **More details** in **npm packages, .env setup, security, and troubleshooting**  
+✅ **Proper structure** for easy readability  
 
-This README will make **UniGrants** look **professional, engaging, and easy to navigate**! 🎉  
-
-Let me know if you want **any more improvements**! 🚀🔥
+This version will **attract users & developers**! Let me know if you need **more changes**! 🚀🔥
