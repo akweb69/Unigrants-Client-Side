@@ -1,9 +1,8 @@
+# 🎓 UniGrants – Find & Apply for Scholarships Easily! 💰
 
-
-```markdown
-<h1 align="center">🎓 UniGrants – Find & Apply for Scholarships Easily! 💰</h1>
-
+<p align="center">
   <img src="https://i.ibb.co/hxj73787/Screenshot-2025-01-30-070904.png" alt="Platform Badge">
+</p>
 
 ---
 
@@ -162,34 +161,6 @@ VITE_PAYMENT_API_KEY=YOUR_STRIPE_API_KEY
 
 ---
 
-## 📚 Documentation  
-
-📘 **[React Docs](https://reactjs.org/docs/getting-started.html)**  
-🔥 **[Firebase Docs](https://firebase.google.com/docs)**  
-🎨 **[TailwindCSS Docs](https://tailwindcss.com/docs/)**  
-⚡ **[Vite Docs](https://vitejs.dev/guide/)**  
-
----
-
-## 🛠 Troubleshooting  
-
-💡 **Firebase Authentication Issues**  
-Ensure API keys in `.env.local` are correct and Firebase Authentication is properly configured.  
-
-💡 **Dependency Errors**  
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-💡 **Build Errors**  
-```bash
-npm run lint
-npm run build
-```
-
----
-
 ## 🔒 Security Best Practices  
 
 ✔ **Never expose `.env.local` files**.  
@@ -215,13 +186,4 @@ npm run build
 ---
 
 <h2 align="center">🚀 UniGrants – Empowering students to achieve their dreams! 🎓💡</h2>
-```
 
----
-
-**🔥 Key Improvements:**  
-✅ **Stylish & Interactive** design with emojis, badges, and collapsible sections  
-✅ **More details** in **npm packages, .env setup, security, and troubleshooting**  
-✅ **Proper structure** for easy readability  
-
-This version will **attract users & developers**! Let me know if you need **more changes**! 🚀🔥
