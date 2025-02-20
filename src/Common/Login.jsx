@@ -12,7 +12,21 @@ const Login = () => {
     const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { user, setUser, loading, setLoading, loginEmailandPassword, googleLogin } = useContext(AuthContext);
-
+    // credantial
+    const moderatorCradentials = {
+        email: "mod@gmail.com",
+        password: "admin@123"
+    }
+    // admin cradential
+    const adminCradential = {
+        email: "admin@gmail.com",
+        password: "admin@123"
+    }
+    // normal user
+    const userCradential = {
+        email: "user@gmail.com",
+        password: "user@123"
+    }
     const onSubmit = (data) => {
         console.log(data)
         setLoadingLogin(true)
@@ -60,6 +74,20 @@ const Login = () => {
             })
 
     }
+    const [fakeEmail, setFakeEmail] = useState("")
+    const [fakePassword, setFakePassword] = useState("")
+    const handleUserCradentials = () => {
+        setFakeEmail(userCradential.email)
+        setFakePassword(userCradential.password)
+    }
+    const handleModeratorCradentials = () => {
+        setFakeEmail(moderatorCradentials.email)
+        setFakePassword(moderatorCradentials.password)
+    }
+    const handleAdminCradentials = () => {
+        setFakeEmail(adminCradential.email)
+        setFakePassword(adminCradential.password)
+    }
     return (
         <div className="w-full ">
             <div className="w-11/12 mx-auto md:w-full">
@@ -69,22 +97,31 @@ const Login = () => {
                     {/* left side */}
                     <div className="col-span-1 w-full h-full bg-gray-100">
                         <div className="p-5">
-                            <h1 className="text-3xl md:text-5xl font-bold font-logoFont pb-10">Login</h1>
+                            <h1 className="text-3xl md:text-5xl font-bold font-logoFont pb-4">Login</h1>
                             {/* form */}
+                            {/* role cradentials button */}
+                            <div className="border p-2 bg-slate-50 rounded-lg">
+                                <div className="capitalize text-sm font-semibold pb-1">testing cradentials</div>
+                                <div className="flex items-center gap-1">
+                                    <div onClick={() => handleUserCradentials()} className="btn btn-xs btn-warning">User</div>
+                                    <div onClick={() => handleModeratorCradentials()} className="btn btn-xs btn-accent">Moderator</div>
+                                    <div onClick={() => handleAdminCradentials()} className="btn btn-xs btn-secondary">Admin</div>
+                                </div>
+                            </div>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 {/* email */}
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-lg">Email</span>
                                     </div>
-                                    <input {...register("email")} type="email" placeholder="example@gmail.com" className="input input-bordered w-full" />
+                                    <input {...register("email")} type="email" defaultValue={fakeEmail} placeholder="Your Email Here" className="input input-bordered w-full" />
                                 </label>
                                 {/* password */}
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-lg">Password</span>
                                     </div>
-                                    <input {...register("password")} type="password" placeholder="password" className="input input-bordered w-full" />
+                                    <input {...register("password")} type="password" defaultValue={fakePassword} placeholder="Password" className="input input-bordered w-full" />
                                 </label>
                                 {/* btn */}
                                 <div className="my-5">
