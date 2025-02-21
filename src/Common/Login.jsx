@@ -14,18 +14,18 @@ const Login = () => {
     const { user, setUser, loading, setLoading, loginEmailandPassword, googleLogin } = useContext(AuthContext);
     // credantial
     const moderatorCradentials = {
-        email: "mod@gmail.com",
-        password: "admin@123"
+        email: "mod@mod.com",
+        password: "Admin@123"
     }
     // admin cradential
     const adminCradential = {
-        email: "admin@gmail.com",
-        password: "admin@123"
+        email: "admin@admin.com",
+        password: "Admin@123"
     }
     // normal user
     const userCradential = {
         email: "user@gmail.com",
-        password: "user@123"
+        password: "Auser@123"
     }
     const onSubmit = (data) => {
         console.log(data)
@@ -93,7 +93,7 @@ const Login = () => {
             <div className="w-11/12 mx-auto md:w-full">
                 <div className="md:grid md:grid-cols-3 ">
                     {/* right sside */}
-                    <div className="col-span-2 md:h-screen "><img src="https://i.ibb.co/8s7drjn/slider1.jpg" className="w-full h-full object-cover" alt="" /></div>
+                    <div className="col-span-2 md:h-screen "><img src="https://i.ibb.co/8s7drjn/slider1.jpg" className="w-full h-full object-cover" referrerPolicy="no-referrer" alt="" /></div>
                     {/* left side */}
                     <div className="col-span-1 w-full h-full bg-gray-100">
                         <div className="p-5">

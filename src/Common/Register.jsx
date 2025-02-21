@@ -194,7 +194,7 @@ const Register = () => {
                     </div>
                     {/* Right side */}
                     <div className="w-full md:w-[60%] md:h-screen">
-                        <img src="https://i.ibb.co/ry1PcZB/register.jpg" className="w-full h-full object-cover" alt="" />
+                        <img src="https://i.ibb.co/ry1PcZB/register.jpg" referrerPolicy="no-referrer" className="w-full h-full object-cover" alt="" />
                     </div>
                 </div>
             </div>
