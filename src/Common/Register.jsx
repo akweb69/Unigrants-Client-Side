@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import { updateProfile } from "firebase/auth";
@@ -17,6 +17,8 @@ const Register = () => {
     const axiosPublic = useAxiosPublic();
     const navigate = useNavigate();
     const [regloading, setRegloading] = useState(false);
+    const [eye, setEye] = useState(true)
+
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -133,24 +135,29 @@ const Register = () => {
                                     <div className="label">
                                         <span className="label-text text-lg">Password</span>
                                     </div>
-                                    <input
-                                        required
-                                        {...register("password", {
-                                            validate: {
-                                                hasUpperCase: (value) =>
-                                                    /[A-Z]/.test(value) || "Password must contain at least one capital letter (A-Z)",
-                                                hasNumber: (value) =>
-                                                    /\d/.test(value) || "Password must contain at least one number (0-9)",
-                                                hasSpecialChar: (value) =>
-                                                    /[@$!%*?&]/.test(value) || "Password must contain at least one special character (@, $, !, %, *, ?, &)",
-                                                minLength: (value) =>
-                                                    value.length >= 6 || "Password must be at least 6 characters long",
-                                            },
-                                        })}
-                                        type="password"
-                                        placeholder="Password"
-                                        className="input input-bordered w-full"
-                                    />
+                                    <div className="relative">
+                                        <input
+                                            required
+                                            {...register("password", {
+                                                validate: {
+                                                    hasUpperCase: (value) =>
+                                                        /[A-Z]/.test(value) || "Password must contain at least one capital letter (A-Z)",
+                                                    hasNumber: (value) =>
+                                                        /\d/.test(value) || "Password must contain at least one number (0-9)",
+                                                    hasSpecialChar: (value) =>
+                                                        /[@$!%*?&]/.test(value) || "Password must contain at least one special character (@, $, !, %, *, ?, &)",
+                                                    minLength: (value) =>
+                                                        value.length >= 6 || "Password must be at least 6 characters long",
+                                                },
+                                            })}
+                                            type={`${eye ? "password" : ""}`}
+                                            placeholder="Password"
+                                            className="input input-bordered w-full"
+                                        />
+                                        {
+                                            eye ? <span onClick={() => setEye(false)} className="absolute right-3 btn btn-xs text-lg rounded-full  bottom-3"><FaEye></FaEye></span> : <span onClick={() => setEye(true)} className="absolute right-3 btn btn-xs text-lg rounded-full  bottom-3"><FaEyeSlash></FaEyeSlash></span>
+                                        }
+                                    </div>
                                 </label>
                                 {errors.password && (
                                     <p className="text-red-500 pt-2 text-sm">{errors.password.message}</p>

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import toast from "react-hot-toast";
@@ -76,17 +76,18 @@ const Login = () => {
     }
     const [fakeEmail, setFakeEmail] = useState("")
     const [fakePassword, setFakePassword] = useState("")
+    const [eye, setEye] = useState(true)
     const handleUserCradentials = () => {
         setFakeEmail(userCradential.email)
-        setFakePassword(userCradential.password)
+        setFakePassword("Auser@123")
     }
     const handleModeratorCradentials = () => {
         setFakeEmail(moderatorCradentials.email)
-        setFakePassword(moderatorCradentials.password)
+        setFakePassword("Admin@123")
     }
     const handleAdminCradentials = () => {
         setFakeEmail(adminCradential.email)
-        setFakePassword(adminCradential.password)
+        setFakePassword("Admin@123")
     }
     return (
         <div className="w-full ">
@@ -117,11 +118,17 @@ const Login = () => {
                                     <input {...register("email")} type="email" defaultValue={fakeEmail} placeholder="Your Email Here" className="input input-bordered w-full" />
                                 </label>
                                 {/* password */}
-                                <label className="form-control w-full">
+                                <label className="form-control w-full ">
                                     <div className="label">
                                         <span className="label-text text-lg">Password</span>
                                     </div>
-                                    <input {...register("password")} type="password" defaultValue={fakePassword} placeholder="Password" className="input input-bordered w-full" />
+                                    <div className="relative">
+                                        <input {...register("password")} type={`${eye ? "password" : ""}`} defaultValue={fakePassword} placeholder="Password" className="input input-bordered w-full " />
+                                        {
+                                            eye ? <span onClick={() => setEye(false)} className="absolute right-3 btn btn-xs text-lg rounded-full  bottom-3"><FaEye></FaEye></span> : <span onClick={() => setEye(true)} className="absolute right-3 btn btn-xs text-lg rounded-full  bottom-3"><FaEyeSlash></FaEyeSlash></span>
+                                        }
+
+                                    </div>
                                 </label>
                                 {/* btn */}
                                 <div className="my-5">
