@@ -34,13 +34,13 @@ const CTASection = () => {
             >
                 <Link
                     to={"/all-scholarship"}
-                    className="bg-white text-teal-500 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition duration-300"
+                    className="bg-white text-teal-500 px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition duration-300 animate-bounce"
                 >
                     Register Now
                 </Link>
                 <Link
                     to={"/about"}
-                    className="border-2 border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-500 transition duration-300"
+                    className="border-2 border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-500 transition duration-300 animate-bounce"
                 >
                     Learn More
                 </Link>

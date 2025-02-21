@@ -3,7 +3,7 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 import S_Card from "../Utilities/S_Card";
 import errorImg from "../assets/images/rb_2506.png";
 import { FaSearch } from "react-icons/fa";
-
+import { motion } from "framer-motion";
 const All_Schol = () => {
     const [scholarship, setScholarship] = useState([]);
     const [search, setSearch] = useState("");
@@ -44,10 +44,18 @@ const All_Schol = () => {
     return (
         <div className="w-full min-h-screen bg-gradient-to-b from-teal-100 via-blue-50  to-orange-50 flex justify-center items-center">
             <div className="w-11/12 mx-auto py-10">
-                <h1 className="text-3xl md:text-5xl mb-4 font-logoFont font-extrabold text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto">All Scholarship</h1>
+                <motion.h1
+                    initial={{ y: -60, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="text-3xl md:text-5xl mb-4 font-logoFont font-extrabold text-transparent bg-gradient-to-tr from-orange-500 to-fuchsia-500 bg-clip-text w-fit mx-auto">All Scholarship</motion.h1>
 
                 {/* Search Bar */}
-                <div className="w-full md:w-1/2 mx-auto p-1 rounded-full border border-orange-500 mb-10">
+                <motion.div
+                    initial={{ y: 60, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="w-full md:w-1/2 mx-auto p-1 rounded-full border border-orange-500 mb-10">
                     <div className="w-full flex justify-between items-center gap-1 flex-grow">
                         <div className="px-2"><FaSearch className="text-orange-500" /></div>
                         <div className="flex-1">
@@ -60,7 +68,7 @@ const All_Schol = () => {
                             Search
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {
                     scholarship.length === 0 ?

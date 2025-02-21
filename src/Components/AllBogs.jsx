@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Heading from "../Utilities/Heading";
-
+import { motion } from "framer-motion";
 const blogsData = [
     {
         id: 1,
@@ -238,7 +238,15 @@ const AllBlogs = () => {
                 {/* Blog cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {currentBlogs.map((blog) => (
-                        <div
+                        <motion.div
+                            initial={{ y: 80, opacity: 0, scale: 0.95 }}
+                            whileInView={{ y: 0, opacity: 1, scale: 1 }}
+                            transition={{
+                                duration: 1.2,
+                                delay: 0.2,
+                                ease: [0.25, 0.46, 0.45, 0.94]
+                            }}
+
                             key={blog.id}
                             className="border rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
                         >
@@ -265,7 +273,7 @@ const AllBlogs = () => {
                             <button className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
                                 See Details
                             </button>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 

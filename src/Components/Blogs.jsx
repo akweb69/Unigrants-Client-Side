@@ -1,5 +1,5 @@
 import Heading from "../Utilities/Heading";
-
+import { motion } from "framer-motion";
 // Blog data
 const blogsData = [
     {
@@ -42,7 +42,10 @@ const Blogs = () => {
                 {/* Blog cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {blogsData.map((blog) => (
-                        <div
+                        <motion.div
+                            initial={{ y: -60, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 1, delay: 0.5 }}
                             key={blog.id}
                             className="border rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105"
                         >
@@ -68,7 +71,7 @@ const Blogs = () => {
                             <button className="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
                                 See Details
                             </button>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
                 {/* Button to navigate to all blogs */}
