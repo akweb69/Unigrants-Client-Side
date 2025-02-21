@@ -105,7 +105,7 @@ const Login = () => {
                                 <div className="flex items-center gap-1">
                                     <div onClick={() => handleUserCradentials()} className="btn btn-xs btn-warning">User</div>
                                     <div onClick={() => handleModeratorCradentials()} className="btn btn-xs btn-accent">Moderator</div>
-                                    <div onClick={() => handleAdminCradentials()} className="btn btn-xs btn-secondary">Admin</div>
+                                    <div onClick={() => handleAdminCradentials()} className="btn btn-xs btn-primary">Admin</div>
                                 </div>
                             </div>
                             <form onSubmit={handleSubmit(onSubmit)}>
